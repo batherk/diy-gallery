@@ -1,0 +1,55 @@
+.parent-element {
+  text-align: center;
+}
+header {
+  padding: 2vw;
+  background-color: lightblue;
+  border-bottom: solid 2px dodgerblue;
+  font-size: 2vw;
+  margin-bottom: 10px;
+}
+.picture-theme-button {
+  background-color: yellow;
+}
+.picture-theme-button:hover {
+  background-color: lightyellow;
+}
+
+.sound-theme-button {
+  background-color: green;
+}
+.sound-theme-button:hover {
+  background-color: lightgreen;
+}
+
+.text-theme-button {
+  background-color: red;
+}
+.text-theme-button:hover {
+  background-color: lightcoral;
+}
+.picture-choice-button {
+  background-color: lightcyan;
+}
+.sound-choice-button {
+  background-color: lightpink;
+}
+.text-choice-button {
+  background-color: lightgrey;
+}
+.artwork-container {
+  background-color: grey;
+  width: 30%;
+  height: 30vw;
+  margin: auto;
+}
+
+/* example of timed transition, nice to have if we want to implement this somewhere */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
