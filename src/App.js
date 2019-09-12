@@ -63,7 +63,7 @@ export default class App extends React.Component {
 
   // saves the current artwork to storage and mark it as a favourit
   handleSave = function () {
-    //TODO : save the current artwork to storage
+    //TODO : save the current artwork and its positon to local storage
     //TODO : mark current as fav = true
   }
   
@@ -83,6 +83,9 @@ export default class App extends React.Component {
     this.setState ({
       artworks : updatedArtworks
     })
+    
+    // TODO : save new artwork and its positon to session storage
+
     return (
       <div>
         {newArtwork}
