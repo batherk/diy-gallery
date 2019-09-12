@@ -61,11 +61,6 @@ export default class App extends React.Component {
     });
   }
 
-  // saves the current artwork to storage and mark it as a favourit
-  handleSave = function () {
-    //TODO : save the current artwork and its positon to local storage
-    //TODO : mark current as fav = true
-  }
   
   // renders an artwork from state or returns a new one
   renderArtwork() {
@@ -123,11 +118,6 @@ export default class App extends React.Component {
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Text-tema 2</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Text-tema 3</button>
         </div>
-
-        <div className="save-button-container">
-          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
-        </div>
-
       </div>
     )
   }

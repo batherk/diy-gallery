@@ -20,6 +20,13 @@ export default class Artwork extends React.Component {
 
 
 
+  // saves the current artwork to storage and mark it as a favourit
+  handleSave = function () {
+    //TODO : save the current artwork and its positon to local storage
+    //TODO : mark current as fav = true
+  }
+
+  
   // TODO: create fetch methods from the themes given in props
   // TODO: use fetched elements and use to genererate this artwork
 
@@ -45,6 +52,9 @@ export default class Artwork extends React.Component {
         </div>
         <div className="sound-container">
           <button className="play-button" onClick={() => this.handlePlay()}>Play sound</button>
+        </div>
+        <div className="save-button-container">
+          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
         </div>
 
       </div>

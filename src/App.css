@@ -2,11 +2,9 @@
   text-align: center;
 }
 header {
-  padding: 2vw;
   background-color: lightblue;
   border-bottom: solid 2px dodgerblue;
   font-size: 2vw;
-  margin-bottom: 10px;
 }
 .picture-theme-button {
   background-color: yellow;
@@ -49,18 +47,76 @@ header {
   }
 }
 
+/* Layout for different screen types*/
 
-@media screen and (orientation:landscape){
-  .artwork-parent{
-      width: 80%;
-      display: flex;
-      flex-direction: column;
+/* Mobile portrait, Pad portrait*/
+@media screen and (orientation:portrait){
+  body{
+    background-color: green;
   }
-
-  .svg-container{
-      width: 70%;
-  }
-  .text-container{
-      width: 30%;
+  .parent-element{
+    grid-template-areas:"header header" "categories categories" "artwork artwork" 
+    "choice choice";
+    grid-template-rows: 10vh 10vh 70vh 10vh;
   }
 }
+
+
+/* Mobile landscape*/
+@media screen and (max-width:767px) and (orientation:landscape){
+  body{
+    background-color: yellow;
+  }
+  .parent-element{
+    grid-template-areas: "header header "  "artwork categories" "choice choice";
+    grid-template-rows:10vh 80vh 10vh;
+  }
+}
+
+
+/* Desktop, Pad landscape */
+@media screen and (min-width:768px) and (orientation:landscape){
+  body{
+    background-color: orange;
+  }
+  .parent-element{
+    grid-template-areas: "header header " "choice empty" "artwork categories";
+    grid-template-rows: 10vh 10vh 80vh;
+    grid-template-columns: 80vw 20vw;
+  }
+
+  .theme-choice-container{
+    display:flex;
+    flex-direction: column;
+  }
+}
+
+/* Grid */ 
+
+.parent-element{
+  display:grid;
+}
+
+header{
+  grid-area:header;
+}
+
+.artwork-choice-container{
+  grid-area:choice;
+}
+
+.artwork-container{
+  grid-area:artwork;
+}
+
+.theme-choice-container{
+  grid-area:categories;
+}
+
+
+button.artwork-button{
+  height: 100%;
+  width: 25%;
+}
+
+
