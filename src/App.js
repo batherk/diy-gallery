@@ -1,169 +1,128 @@
 import React from 'react';
 import './App.css';
+import Artwork from './components/Artwork/Artwork'
 
 export default class App extends React.Component {
 
   constructor(props){ 
     super(props);
     this.state = {
-      currentPictureTheme : '',   // holds the current picture theme
-      currentSoundTheme : '',     // holds the current sound theme
-      currentTextTheme : '',      // holds the current text theme
-      currentPictures : [],       // current theme pictures
-      currentSounds : [],         // current theme sounds
-      currentTexts : [],          // current theme texts
-      choosenPicture : '',        // current picture in artwork
-      choosenSound : '',          // current sound in artwork
-      choosenText : ''            // current text in artwork
+      currentPictureTheme : '',                 // holds the current picture theme
+      currentSoundTheme : '',                   // holds the current sound theme
+      currentTextTheme : '',                    // holds the current text theme
+      currentArtworkNr : '',                    // holds the current artwork nr
+      artworks : ['','','',''],                 // holds the current artworks
+      artworkFav : [false, false, false, false] // if the artworks has been saved
     }; 
   }
 
-  // sets the new picture theme and loads pictures related to the new theme
-  changePictureTheme = async function (themeNr) {
+  // reset artworks and checks storage for artworks built from the new themes
+  handleThemeChange = function () {
+    this.setState({
+      artwork1 : '',
+      artwork2 : '',
+      artwork3 : '',
+      artwork4 : ''
+    })
+
+    //TODO : check local storage and session storage for current combination of themes
+    //TODO : set right artwork to stored artwork
+    //TODO : set stored artwork as favourited
+  }
+
+  // sets the new picture theme
+  handleChangePictureTheme = async function (themeNr) {
     this.setState({
       currentPictureTheme : themeNr
     });
-    if (themeNr === 1) {
-      //TODO: AJAX fetch pic1.svg, pic2.svg, pic3.svg and pic4.svg
-    }
-    if (themeNr === 2) {
-      //TODO: AJAX fetch pic5.svg, pic6.svg, pic7.svg and pic8.svg
-    }
-    if (themeNr === 3) {
-      //TODO: AJAX fetch pic9.svg, pic10.svg, pic11.svg and pic12.svg
-    }
-    this.setState({
-      currentPictures : [] //fetched values
-    });
+    this.handleThemeChange()
   }
 
-  // sets the new sounds theme and loads sounds related to the new theme
-  changeSoundTheme = async function (themeNr) {
+  // sets the new sounds theme and reset the artworks
+  handleChangeSoundTheme = async function (themeNr) {
     this.setState({
       currentSoundTheme : themeNr
     });
-    if (themeNr === 1) {
-      //lyd ved audio-tag fra HTML5
-    }
-    if (themeNr === 2) {
-      //lyd ved audio-tag fra HTML5
-    }
-    if (themeNr === 3) {
-      //lyd ved audio-tag fra HTML5
-    }
-    this.setState({
-      currentSounds : [] //fetched values
-    });
+    this.handleThemeChange()
   }
 
-  // sets the new text theme and loads texts related to the new theme
-  changeTextTheme = async function (themeNr) {
+  // sets the new text theme
+  handleChangeTextTheme = async function (themeNr) {
     this.setState({
       currentTextTheme : themeNr
     });
-    if (themeNr === 1) {
-      //AJAX fetch ./texts-cat1.text1, -text2, -text3 and -text4
-    }
-    if (themeNr === 2) {
-      //AJAX fetch ./texts-cat2.text1, -text2, -text3 and -text4
-    }
-    if (themeNr === 3) {
-      //AJAX fetch ./texts-cat3.text1, -text2, -text3 and -text4
-    }
+    this.handleThemeChange()
+  }
+
+  // sets the new arrtwork
+  handleChangeArtwork = function (artworkNr) {
     this.setState({
-      currentTexts : [] //fetched values
+      currentArtworkNr : artworkNr
     });
   }
 
-  // makes the choosen audio file start to play
-  play() {
-    // TODO: fill with appropriate action
+  // saves the current artwork to storage and mark it as a favourit
+  handleSave = function () {
+    //TODO : save the current artwork to storage
+    //TODO : mark current as fav = true
   }
-
-  // combines the choosen elements to create the displayed artwork
+  
+  // renders an artwork from state or returns a new one
   renderArtwork() {
-    const { currentPictures, currentSounds, currentTexts, choosenPicture, choosenSound, choosenText } = this.state
+    const { currentArtworkNr, artworks, currentPictureTheme, currentSoundTheme, currentTextTheme } = this.state
+    if (artworks[currentArtworkNr]) {
+      return artworks[currentArtworkNr]
+    }
+    let newArtwork =  <Artwork
+                        picTheme = {currentPictureTheme}
+                        soundTheme = {currentSoundTheme}
+                        textTheme = {currentTextTheme}
+                      />
+    let updatedArtworks = artworks
+    updatedArtworks[currentArtworkNr] = newArtwork
+    this.setState ({
+      artworks : updatedArtworks
+    })
     return (
-      <div className="artwork-parent">
-        {/* TODO: combine currentPicture[choosenPicture], currentSounds[choosenSound] and currentTexts[choosenText]*/}
-        HERE COMES AMAZING ART..
+      <div>
+        {newArtwork}
       </div>
     )
   }
 
   // the parent render of the react component
   render() {
-    const { 
-      currentPictureTheme, 
-      currentSoundTheme, 
-      currentTextTheme, 
-    } = this.state
 
     return (
       <div className="parent-element">
 
         <header>EXAMPLE HEADER..</header>
 
-        <div className="theme-choice-container">
-          <button className="picture-theme-button" onClick={ () => this.changePictureTheme(1) }>Bilde-tema 1</button>
-          <button className="picture-theme-button" onClick={ () => this.changePictureTheme(2) }>Bilde-tema 2</button>
-          <button className="picture-theme-button" onClick={ () => this.changePictureTheme(3) }>Bilde-tema 3</button>
-          <button className="sound-theme-button" onClick={ () => this.changeSoundTheme(1) }>Lyd-tema 1</button>
-          <button className="sound-theme-button" onClick={ () => this.changeSoundTheme(2) }>Lyd-tema 2</button>
-          <button className="sound-theme-button" onClick={ () => this.changeSoundTheme(3) }>Lyd-tema 3</button>
-          <button className="text-theme-button" onClick={ () => this.changeTextTheme(1) }>Text-tema 1</button>
-          <button className="text-theme-button" onClick={ () => this.changeTextTheme(2) }>Text-tema 2</button>
-          <button className="text-theme-button" onClick={ () => this.changeTextTheme(3) }>Text-tema 3</button>
-        </div>
-
-        <div className="combination-choice-container">
-          <button className="picture-choice-button" onClick={ () => this.setState({ choosenPicture: 0 }) }>
-            tema {currentPictureTheme} - Bilde1
-          </button>
-          <button className="picture-choice-button" onClick={ () => this.setState({ choosenPicture: 1 }) }>
-            tema {currentPictureTheme} - Bilde2
-          </button>
-          <button className="picture-choice-button" onClick={ () => this.setState({ choosenPicture: 2 }) }>
-            tema {currentPictureTheme} - Bilde3
-          </button>
-          <button className="picture-choice-button" onClick={ () => this.setState({ choosenPicture: 3 }) }>
-            tema {currentPictureTheme} - Bilde4
-          </button>
-
-          <button className="sound-choice-button" onClick={ () => this.setState({ choosenSound: 0 }) }>
-            tema {currentSoundTheme} - Sang1
-          </button>
-          <button className="sound-choice-button" onClick={ () => this.setState({ choosenSound: 1 }) }>
-            tema {currentSoundTheme} - Sang2
-          </button>
-          <button className="sound-choice-button" onClick={ () => this.setState({ choosenSound: 2 }) }>
-            tema {currentSoundTheme} - Sang3
-          </button>
-          <button className="sound-choice-button" onClick={ () => this.setState({ choosenSound: 3 }) }>
-            tema {currentSoundTheme} - Sang4
-          </button>
-
-          <button className="text-choice-button" onClick={ () => this.setState({ choosenText: 0 }) }>
-            tema {currentTextTheme} - text1
-          </button>
-          <button className="text-choice-button" onClick={ () => this.setState({ choosenText: 1 }) }>
-            tema {currentTextTheme} - text2
-          </button>
-          <button className="text-choice-button" onClick={ () => this.setState({ choosenText: 2 }) }>
-            tema {currentTextTheme} - text3
-          </button>
-          <button className="text-choice-button" onClick={ () => this.setState({ choosenText: 3 }) }>
-            tema {currentTextTheme} - text4
-          </button>
-
+        <div className="artwork-choice-container">
+          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(1) }>Artwork 1</button>
+          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(2) }>Artwork 2</button>
+          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(3) }>Artwork 3</button>
+          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(4) }>Artwork 4</button>
         </div>
 
         <div className="artwork-container">
           {this.renderArtwork()}
         </div>
 
-        <div className="play-button-container">
-          <button className="play-button" onClick={() => this.play()}>Play artwork</button>
+        <div className="theme-choice-container">
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>Bilde-tema 1</button>
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Bilde-tema 2</button>
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>Bilde-tema 3</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Lyd-tema 1</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Lyd-tema 2</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Lyd-tema 3</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>Text-tema 1</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Text-tema 2</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Text-tema 3</button>
+        </div>
+
+        <div className="save-button-container">
+          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
         </div>
 
       </div>
