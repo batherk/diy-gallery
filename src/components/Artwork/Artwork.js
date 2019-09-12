@@ -21,7 +21,7 @@ export default class Artwork extends React.Component {
 
 
   // TODO: create fetch methods from the themes given in props
-  // TODO: save fetched elements and use to genererate this artwork
+  // TODO: use fetched elements and use to genererate this artwork
 
 
 
