@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+/* Layout for different screen types*/
+
+/* Mobile portrait, Pad portrait*/
+@media screen and (orientation:portrait){
+  body{
+    background-color: green;
+  }
+}
+
+
+/* Mobile landscape*/
+@media screen and (max-width:767px) and (orientation:landscape){
+  body{
+    background-color: yellow;
+  }
+}
+
+
+/* Desktop, Pad*/
+@media screen and (min-width:768px) and (orientation:landscape){
+  body{
+    background-color: orange;
+  }
+}
+

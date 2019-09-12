@@ -43,12 +43,7 @@ export default class Artwork extends React.Component {
                 HEIOGHA TEXT
             </p>
         </div>
-
         <div className="sound-container">
-            {/*maybe not needed, depends how HTML5 audio-tag works*/}
-        </div>
-
-        <div className="play-button-container">
           <button className="play-button" onClick={() => this.handlePlay()}>Play sound</button>
         </div>
 

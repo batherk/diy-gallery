@@ -37,12 +37,7 @@ header {
 .text-choice-button {
   background-color: lightgrey;
 }
-.artwork-container {
-  background-color: grey;
-  width: 30%;
-  height: 30vw;
-  margin: auto;
-}
+
 
 /* example of timed transition, nice to have if we want to implement this somewhere */
 @keyframes App-logo-spin {
@@ -51,5 +46,21 @@ header {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+@media screen and (orientation:landscape){
+  .artwork-parent{
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .svg-container{
+      width: 70%;
+  }
+  .text-container{
+      width: 30%;
   }
 }
