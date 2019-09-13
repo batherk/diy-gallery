@@ -2,6 +2,7 @@
     .artwork-parent{
         grid-template-areas: "image-cont text-cont text-cont" "image-cont sound-cont save-cont";
         grid-template-rows: 80% 20%; 
+        grid-template-columns: 60% 20% 20%;
     }
 }
 

@@ -12,7 +12,8 @@ export default class App extends React.Component {
       currentTextTheme : '',                    // holds the current text theme
       currentArtworkNr : '',                    // holds the current artwork nr
       artworks : ['','','',''],                 // holds the current artworks
-      artworkFav : [false, false, false, false] // if the artworks has been saved
+      artworkFav : [false, false, false, false], // if the artworks has been saved
+      menuOpen: false
     }; 
   }
 
@@ -61,6 +62,12 @@ export default class App extends React.Component {
     });
   }
 
+  // Toggles hamburger menu
+  menuHandler = () =>{
+    this.setState((prevState) =>{
+      return {menuOpen:!prevState.menuOpen}
+    });
+  };
   
   // renders an artwork from state or returns a new one
   renderArtwork() {
@@ -90,11 +97,18 @@ export default class App extends React.Component {
 
   // the parent render of the react component
   render() {
+    let themeChoiceContainerClass = "theme-choice-container";
+    if(this.state.menuOpen){
+      themeChoiceContainerClass = "theme-choice-container menu-open";
+    }
 
     return (
       <div className="parent-element">
 
-        <header>EXAMPLE HEADER..</header>
+        <header>
+          <button className="menu-button" onClick={ () => this.menuHandler()}>Menu</button>
+          EXAMPLE HEADER..
+        </header>
 
         <div className="artwork-choice-container">
           <button className="artwork-button" onClick={ () => this.handleChangeArtwork(1) }>Artwork 1</button>
@@ -107,7 +121,8 @@ export default class App extends React.Component {
           {this.renderArtwork()}
         </div>
 
-        <div className="theme-choice-container">
+        <div className={themeChoiceContainerClass}>
+          <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>Bilde-tema 1</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Bilde-tema 2</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>Bilde-tema 3</button>
