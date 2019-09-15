@@ -43,52 +43,28 @@ export default class Artwork extends React.Component {
     }
   }
 
+  // fetches the correct picture locally
   fetchPicfile = async function () {
     const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
     let randPicture = picNames[Math.floor(Math.random()*4)];
-    let fetchedPic = []
-    if (this.props.picTheme === 1) {
-      fetch('pictures/theme1/'+randPicture)
-      .then(res => {
-        fetchedPic = res.data;
-        console.log(res)
-        //console.log("res.data " + res.data)
-        
-        this.setState({
-          chosenPic : fetchedPic
-        })
+    let chosenTheme = this.props.picTheme
+    fetch('pictures/theme'+chosenTheme.toString()+'/'+randPicture)
+    .then(response => response.text())
+    .then(data =>{
+      this.setState({
+        chosenPic : data
       })
-
-
-      console.log("pic fetched")
-    
-    }
-    
+    })    
   }
 
   // fetches the correct text file based on given theme as prop
   fetchTextfile = async function () {
-    if( this.props.textTheme === 1) {
-      let fetchedFile = await fetch('texts-theme1.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
-    if( this.props.textTheme === 2) {
-      let fetchedFile = await fetch('texts-theme2.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
-    if( this.props.textTheme === 3) {
-      let fetchedFile = await fetch('texts-theme3.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
+    let chosenTheme = this.props.textTheme
+    let fetchedFile = await fetch('texts-theme'+chosenTheme.toString()+'.json')
+    let textFile = await fetchedFile.json()
+    this.setState({
+      currentTextfile : textFile
+    })
     this.chooseRandomText();
   }
 
@@ -125,8 +101,8 @@ export default class Artwork extends React.Component {
       <div className="artwork-parent">
 
         <div className="svg-container">
-          <div>{chosenPic}</div>
-            {/*<div dangerouslySetInnerHTML={{__html: chosenPic}}/>*/}
+ 
+            <div dangerouslySetInnerHTML={{__html: chosenPic}}/>
         </div>
 
         <div className="text-container">
