@@ -4,47 +4,42 @@ import './Artwork.css';
 
 export default class Artwork extends React.Component {
 
-    //TODO in component: receive props picTheme, soundTheme, textTheme
-
   constructor(props){
     super(props);
     this.state = {
+      artNr : '',
       textTheme : '',
       currentTextfile : '',
       chosenText : '',
       picTheme : '',
-      currectPicTheme : '',
       chosenPic : [],
+      soundTheme : '',
+      chosenSound : ''
     }; 
   }
 
-  componentDidMount() {
-    this.setState({
-      textTheme : this.props.textTheme,
-      picTheme : this.props.picTheme,
-      artNr : this.props.artNr
-    })
-    //this.fetchTextfile(this.props.textTheme)
-    //this.fetchPicfile(this.props.picTheme)
+  componentDidUpdate() {
+    if(this.props.artNr !== this.state.artNr 
+            || this.props.textTheme !== this.state.textTheme 
+            || this.props.picTheme !== this.state.picTheme
+            || this.props.soundTheme !== this.state.soundTheme)
+    {
+      this.fetchTextfile(this.props.textTheme)
+      this.fetchPicfile(this.props.picTheme)
+      // add sound fetch if necessary
+      this.setState({
+        artNr : this.props.artNr,
+        textTheme : this.props.textTheme,
+        picTheme : this.props.picTheme,
+        soundTheme : this.props.soundTheme
+      })
+    }
   }
-
-  /*componentDidUpdate() {
-    if(this.props.textTheme !== this.state.textTheme || this.props.artNr !== this.state.artNr) {
-      //this.fetchTextfile(this.props.textTheme)
-    }
-    if (this.props.picTheme !== this.state.picTheme || this.props.artNr !== this.state.artNr){
-      //this.fetchPicfile(this.props.picTheme)
-    }
-    this.setState({
-      textTheme : this.props.textTheme,
-      picTheme : this.props.picTheme
-    })
-  }*/
 
   // fetches the correct picture locally
   fetchPicfile = async function (chosenTheme) {
     const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
-    let randPicture = picNames[Math.floor(Math.random()*4)];
+    const randPicture = picNames[Math.floor(Math.random()*4)];
     fetch('pictures/theme'+chosenTheme.toString()+'/'+randPicture)
     .then(response => response.text())
     .then(data =>{
@@ -56,9 +51,9 @@ export default class Artwork extends React.Component {
 
   // fetches the correct text file based on given theme as prop
   fetchTextfile = async function (chosenTheme) {
-    let url = 'texts-theme'+chosenTheme.toString()+'.json'
-    let fetchedFile = await fetch(url)
-    let textFile = await fetchedFile.json()
+    const url = 'texts-theme'+chosenTheme.toString()+'.json'
+    const fetchedFile = await fetch(url)
+    const textFile = await fetchedFile.json()
     this.setState({
       currentTextfile : textFile
     })
