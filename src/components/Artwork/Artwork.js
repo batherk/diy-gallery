@@ -26,7 +26,7 @@ export default class Artwork extends React.Component {
     {
       this.fetchTextfile(this.props.textTheme)
       this.fetchPicfile(this.props.picTheme)
-      // add sound fetch if necessary
+      this.pickSoundfile(this.props.soundTheme)
       this.setState({
         artNr : this.props.artNr,
         textTheme : this.props.textTheme,
@@ -47,6 +47,15 @@ export default class Artwork extends React.Component {
         chosenPic : data
       })
     })    
+  }
+
+  // fetches the correct sound locally
+  pickSoundfile = async function (chosenTheme) {
+    const randSound = Math.floor(Math.random()*4)+1;
+    this.setState({
+        chosenSound : "sounds/theme" +chosenTheme.toString()+ "/Sound" + randSound.toString() + ".mp3"
+    })
+    console.log(this.state.chosenSound)    
   }
 
   // fetches the correct text file based on given theme as prop
@@ -84,7 +93,7 @@ export default class Artwork extends React.Component {
 
   // the parent render of the react component
   render() {
-    const { chosenText, chosenPic } = this.state
+    const { chosenText, chosenPic,chosenSound} = this.state
 
     return (
       <div className="artwork-parent">
@@ -100,12 +109,8 @@ export default class Artwork extends React.Component {
             </p>
         </div>
         <div className="sound-container">
-          <button className="play-button" onClick={() => this.handlePlay()}>Play sound</button>
+          <audio ref="audio_tag" src={chosenSound} controls></audio>
         </div>
-        <div className="save-button-container">
-          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
-        </div>
-
       </div>
     )
   }
