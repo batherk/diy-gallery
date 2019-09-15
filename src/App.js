@@ -12,7 +12,8 @@ export default class App extends React.Component {
       currentTextTheme : '',                    // holds the current text theme
       currentArtworkNr : '',                    // holds the current artwork nr
       artworks : ['','','',''],                 // holds the current artworks
-      artworkFav : [false, false, false, false] // if the artworks has been saved
+      artworkFav : [false, false, false, false], // if the artworks has been saved
+      menuOpen: false
     }; 
   }
 
@@ -59,11 +60,12 @@ export default class App extends React.Component {
     });
   }
 
-  // saves the current artwork to storage and mark it as a favourit
-  handleSave = function () {
-    //TODO : save the current artwork and its positon to local storage
-    //TODO : mark current as fav = true
-  }
+  // Toggles hamburger menu
+  menuHandler = () =>{
+    this.setState((prevState) =>{
+      return {menuOpen:!prevState.menuOpen}
+    });
+  };
   
   // renders an artwork
   renderArtwork() {
@@ -79,11 +81,18 @@ export default class App extends React.Component {
 
   // the parent render of the react component
   render() {
+    let themeChoiceContainerClass = "theme-choice-container";
+    if(this.state.menuOpen){
+      themeChoiceContainerClass = "theme-choice-container menu-open";
+    }
 
     return (
       <div className="parent-element">
 
-        <header>EXAMPLE HEADER..</header>
+        <header>
+          <button className="menu-button" onClick={ () => this.menuHandler()}>Menu</button>
+          EXAMPLE HEADER..
+        </header>
 
         <div className="artwork-choice-container">
           <button className="artwork-button" onClick={ () => this.handleChangeArtwork(1) }>Artwork 1</button>
@@ -96,7 +105,8 @@ export default class App extends React.Component {
           {this.renderArtwork()}
         </div>
 
-        <div className="theme-choice-container">
+        <div className={themeChoiceContainerClass}>
+          <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>Bilde-tema 1</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Bilde-tema 2</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>Bilde-tema 3</button>
@@ -107,11 +117,6 @@ export default class App extends React.Component {
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Text-tema 2</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Text-tema 3</button>
         </div>
-
-        <div className="save-button-container">
-          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
-        </div>
-
       </div>
     )
   }
