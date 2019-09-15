@@ -1,6 +1,7 @@
 import React from 'react';
 import './Artwork.css';
 
+
 export default class Artwork extends React.Component {
 
     //TODO in component: receive props picTheme, soundTheme, textTheme
@@ -12,6 +13,9 @@ export default class Artwork extends React.Component {
       textTheme : '',
       currentTextfile : '',
       choosenText : '',
+      picTheme : '',
+      currectPicTheme : '',
+      chosenPic : [],
     }; 
   }
 
@@ -20,6 +24,7 @@ export default class Artwork extends React.Component {
       textTheme : this.props.textTheme
     })
     this.fetchTextfile()
+    this.fetchPicfile()
   }
 
   componentDidUpdate() {
@@ -28,7 +33,37 @@ export default class Artwork extends React.Component {
         textTheme : this.props.textTheme
       })
       this.fetchTextfile()
+      
     }
+    if (this.props.picTheme !== this.state.picTheme){
+      this.setState({
+        picTheme : this.props.picTheme
+      })
+      this.fetchPicfile()
+    }
+  }
+
+  fetchPicfile = async function () {
+    const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
+    let randPicture = picNames[Math.floor(Math.random()*4)];
+    let fetchedPic = []
+    if (this.props.picTheme === 1) {
+      fetch('pictures/theme1/'+randPicture)
+      .then(res => {
+        fetchedPic = res.data;
+        console.log(res)
+        //console.log("res.data " + res.data)
+        
+        this.setState({
+          chosenPic : fetchedPic
+        })
+      })
+
+
+      console.log("pic fetched")
+    
+    }
+    
   }
 
   // fetches the correct text file based on given theme as prop
@@ -67,6 +102,7 @@ export default class Artwork extends React.Component {
     })
   }
 
+
   // makes the choosen audio file start playing
   handlePlay() {
     // TODO: fill with appropriate action
@@ -81,16 +117,16 @@ export default class Artwork extends React.Component {
 
   // the parent render of the react component
   render() {
-    const { choosenText } = this.state
+    const { choosenText, chosenPic } = this.state
+
+    console.log(this.state)
 
     return (
       <div className="artwork-parent">
 
         <div className="svg-container">
-            <img 
-                src="https://cloudfour.com/examples/img-currentsrc/images/kitten-small.png"
-                alt = "svg-file"
-            />
+          <div>{chosenPic}</div>
+            {/*<div dangerouslySetInnerHTML={{__html: chosenPic}}/>*/}
         </div>
 
         <div className="text-container">
