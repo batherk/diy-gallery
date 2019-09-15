@@ -2,11 +2,9 @@
   text-align: center;
 }
 header {
-  padding: 2vw;
   background-color: lightblue;
   border-bottom: solid 2px dodgerblue;
   font-size: 2vw;
-  margin-bottom: 10px;
 }
 .picture-theme-button {
   background-color: yellow;
@@ -49,18 +47,102 @@ header {
   }
 }
 
+/* Layout for different screen types*/
 
-@media screen and (orientation:landscape){
-  .artwork-parent{
-      width: 80%;
-      display: flex;
-      flex-direction: column;
+/* With category menu*/
+@media (orientation:portrait),(max-width:767px) and (orientation:landscape){
+  header{
+    height: 10vh;
+  }
+  .parent-element{
+    display: flex;
+    flex-direction: column;
   }
 
-  .svg-container{
-      width: 70%;
+  .theme-choice-container{
+    order: 1;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    transform:translateX(-100%);
+    /*transition: transform ease-in-out 0.3s;*/
+    width: 60vw;
+    background-color: #f4f4f4;
   }
-  .text-container{
-      width: 30%;
+
+  .theme-choice-container.menu-open{
+    transform:translateX(0);
+    transition: transform ease-in-out 0.3s;
+  }
+  
+  .artwork-container{
+    order: 2;
+    height: 80vh;
+  }
+
+  .artwork-choice-container{
+    order: 3;
+    height: 10vh;
   }
 }
+
+
+/* Mobile portrait, Pad portrait*/
+@media screen and (orientation:portrait){
+  body{
+    background-color: green;
+  }  
+}
+
+
+/* Mobile landscape*/
+@media screen and (max-width:767px) and (orientation:landscape){
+  body{
+    background-color: yellow;
+  }
+}
+
+
+/* Desktop, Pad landscape */
+@media screen and (min-width:768px) and (orientation:landscape){
+  body{
+    background-color: orange;
+  }
+  .menu-button, .close-menu{
+    display:none;
+  }
+  .parent-element{
+    display:grid;
+    grid-template-areas: "header header " "choice empty" "artwork categories";
+    grid-template-rows: 10vh 10vh 80vh;
+    grid-template-columns: 80vw 20vw;
+  }
+
+  .theme-choice-container{
+    display:flex;
+    flex-direction: column;
+    grid-area:categories;
+  }
+  
+  header{
+    grid-area:header;
+  }
+  
+  .artwork-choice-container{
+    grid-area:choice;
+  }
+  
+  .artwork-container{
+    grid-area:artwork;
+  }
+  
+}
+
+button.artwork-button{
+  height: 100%;
+  width: 25%;
+}
+
+

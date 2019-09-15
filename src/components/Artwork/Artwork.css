@@ -1,26 +1,52 @@
 @media screen and (orientation:landscape){
-    .artwork-container{
-        height: 70vh;
-        display:flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     .artwork-parent{
-        width: 80%;
-        height: 100%;
-        display: grid;
-        grid-template-areas: "image-cont text-cont" "image-cont sound-cont"
+        grid-template-areas: "image-cont text-cont text-cont" "image-cont sound-cont save-cont";
+        grid-template-rows: 80% 20%; 
+        grid-template-columns: 60% 20% 20%;
     }
+}
 
-    .svg-container{
-        grid-area: image-cont;
+@media screen and (orientation:portrait){
+    .artwork-parent{
+        grid-template-areas: "image-cont image-cont" "text-cont text-cont" "sound-cont save-cont";
+        grid-template-rows: 60% 20% 10%; 
     }
-    .text-container{
-        grid-area: text-cont;
-    }
-    .sound-container{
-        grid-area: sound-cont;
-    }
+}
 
+.artwork-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.artwork-parent{
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+
+
+.svg-container{
+    grid-area: image-cont;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-container{
+    grid-area: text-cont;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sound-container{
+    grid-area: sound-cont;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.save-button-container{
+    grid-area: save-cont;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
