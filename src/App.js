@@ -7,12 +7,12 @@ export default class App extends React.Component {
   constructor(props){ 
     super(props);
     this.state = {
-      currentPictureTheme : '',                 // holds the current picture theme
-      currentSoundTheme : '',                   // holds the current sound theme
-      currentTextTheme : '',                    // holds the current text theme
-      currentArtworkNr : '',                    // holds the current artwork nr
-      artworks : ['','','',''],                 // holds the current artworks
-      artworkFav : [false, false, false, false], // if the artworks has been saved
+      currentPictureTheme : 1,                    // holds the current picture theme
+      currentSoundTheme : 1,                      // holds the current sound theme
+      currentTextTheme : 1,                       // holds the current text theme
+      currentArtworkNr : 1,                       // holds the current artwork nr
+      artworks : ['','','',''],                   // holds the current artworks
+      artworkFav : [false, false, false, false],  // if the artworks has been saved
       menuOpen: false
     }; 
   }
@@ -26,7 +26,6 @@ export default class App extends React.Component {
 
     //TODO : check local storage and session storage for current combination of themes
     //TODO : set right artwork to stored artwork
-    //TODO : set stored artwork as favourited
   }
 
   // sets the new picture theme
@@ -69,12 +68,13 @@ export default class App extends React.Component {
   
   // renders an artwork
   renderArtwork() {
-    const { currentPictureTheme, currentSoundTheme, currentTextTheme } = this.state
+    const { currentPictureTheme, currentSoundTheme, currentTextTheme, currentArtworkNr } = this.state
     return (
       <Artwork
         picTheme = {currentPictureTheme}
         soundTheme = {currentSoundTheme}
         textTheme = {currentTextTheme}
+        artNr = {currentArtworkNr}
       />
     )
   }

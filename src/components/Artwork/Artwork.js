@@ -4,50 +4,42 @@ import './Artwork.css';
 
 export default class Artwork extends React.Component {
 
-    //TODO in component: receive props picTheme, soundTheme, textTheme
-    //TODO in component: generate a random artwork given the themes above
-
   constructor(props){
     super(props);
     this.state = {
+      artNr : '',
       textTheme : '',
       currentTextfile : '',
-      choosenText : '',
+      chosenText : '',
       picTheme : '',
-      currectPicTheme : '',
       chosenPic : [],
+      soundTheme : '',
+      chosenSound : ''
     }; 
   }
 
-  componentDidMount() {
-    this.setState({
-      textTheme : this.props.textTheme
-    })
-    this.fetchTextfile()
-    this.fetchPicfile()
-  }
-
   componentDidUpdate() {
-    if(this.props.textTheme !== this.state.textTheme) {
+    if(this.props.artNr !== this.state.artNr 
+            || this.props.textTheme !== this.state.textTheme 
+            || this.props.picTheme !== this.state.picTheme
+            || this.props.soundTheme !== this.state.soundTheme)
+    {
+      this.fetchTextfile(this.props.textTheme)
+      this.fetchPicfile(this.props.picTheme)
+      // add sound fetch if necessary
       this.setState({
-        textTheme : this.props.textTheme
+        artNr : this.props.artNr,
+        textTheme : this.props.textTheme,
+        picTheme : this.props.picTheme,
+        soundTheme : this.props.soundTheme
       })
-      this.fetchTextfile()
-      
-    }
-    if (this.props.picTheme !== this.state.picTheme){
-      this.setState({
-        picTheme : this.props.picTheme
-      })
-      this.fetchPicfile()
     }
   }
 
   // fetches the correct picture locally
-  fetchPicfile = async function () {
+  fetchPicfile = async function (chosenTheme) {
     const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
-    let randPicture = picNames[Math.floor(Math.random()*4)];
-    let chosenTheme = this.props.picTheme
+    const randPicture = picNames[Math.floor(Math.random()*4)];
     fetch('pictures/theme'+chosenTheme.toString()+'/'+randPicture)
     .then(response => response.text())
     .then(data =>{
@@ -58,10 +50,10 @@ export default class Artwork extends React.Component {
   }
 
   // fetches the correct text file based on given theme as prop
-  fetchTextfile = async function () {
-    let chosenTheme = this.props.textTheme
-    let fetchedFile = await fetch('texts-theme'+chosenTheme.toString()+'.json')
-    let textFile = await fetchedFile.json()
+  fetchTextfile = async function (chosenTheme) {
+    const url = 'texts-theme'+chosenTheme.toString()+'.json'
+    const fetchedFile = await fetch(url)
+    const textFile = await fetchedFile.json()
     this.setState({
       currentTextfile : textFile
     })
@@ -72,12 +64,11 @@ export default class Artwork extends React.Component {
   chooseRandomText() {
     const { currentTextfile } = this.state
     const texts = [currentTextfile.text1, currentTextfile.text2, currentTextfile.text3, currentTextfile.text4]
-    const choosenText = texts[Math.floor(Math.random() * 4)];
+    const chosenText = texts[Math.floor(Math.random() * 4)];
     this.setState({
-      choosenText : choosenText
+      chosenText : chosenText
     })
   }
-
 
   // makes the choosen audio file start playing
   handlePlay() {
@@ -85,24 +76,15 @@ export default class Artwork extends React.Component {
   }
 
 
-
-  // saves the current artwork to storage and mark it as a favourit
+  // saves the current artwork to storage
   handleSave = function () {
     //TODO : save the current artwork and its positon to local storage
-    //TODO : mark current as fav = true
   }
-
-  
-  // TODO: create fetch methods from the themes given in props
-  // TODO: use fetched elements and use to genererate this artwork
-
 
 
   // the parent render of the react component
   render() {
-    const { choosenText, chosenPic } = this.state
-
-    console.log(this.state)
+    const { chosenText, chosenPic } = this.state
 
     return (
       <div className="artwork-parent">
@@ -114,7 +96,7 @@ export default class Artwork extends React.Component {
 
         <div className="text-container">
             <p>
-                {choosenText}
+                {chosenText}
             </p>
         </div>
         <div className="sound-container">
