@@ -1,6 +1,7 @@
 import React from 'react';
 import './Artwork.css';
 
+
 export default class Artwork extends React.Component {
 
     //TODO in component: receive props picTheme, soundTheme, textTheme
@@ -12,6 +13,9 @@ export default class Artwork extends React.Component {
       textTheme : '',
       currentTextfile : '',
       choosenText : '',
+      picTheme : '',
+      currectPicTheme : '',
+      chosenPic : [],
     }; 
   }
 
@@ -20,6 +24,7 @@ export default class Artwork extends React.Component {
       textTheme : this.props.textTheme
     })
     this.fetchTextfile()
+    this.fetchPicfile()
   }
 
   componentDidUpdate() {
@@ -28,32 +33,38 @@ export default class Artwork extends React.Component {
         textTheme : this.props.textTheme
       })
       this.fetchTextfile()
+      
     }
+    if (this.props.picTheme !== this.state.picTheme){
+      this.setState({
+        picTheme : this.props.picTheme
+      })
+      this.fetchPicfile()
+    }
+  }
+
+  // fetches the correct picture locally
+  fetchPicfile = async function () {
+    const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
+    let randPicture = picNames[Math.floor(Math.random()*4)];
+    let chosenTheme = this.props.picTheme
+    fetch('pictures/theme'+chosenTheme.toString()+'/'+randPicture)
+    .then(response => response.text())
+    .then(data =>{
+      this.setState({
+        chosenPic : data
+      })
+    })    
   }
 
   // fetches the correct text file based on given theme as prop
   fetchTextfile = async function () {
-    if( this.props.textTheme === 1) {
-      let fetchedFile = await fetch('texts-theme1.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
-    if( this.props.textTheme === 2) {
-      let fetchedFile = await fetch('texts-theme2.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
-    if( this.props.textTheme === 3) {
-      let fetchedFile = await fetch('texts-theme3.json')
-      let textFile = await fetchedFile.json()
-      this.setState({
-        currentTextfile : textFile
-      })
-    }
+    let chosenTheme = this.props.textTheme
+    let fetchedFile = await fetch('texts-theme'+chosenTheme.toString()+'.json')
+    let textFile = await fetchedFile.json()
+    this.setState({
+      currentTextfile : textFile
+    })
     this.chooseRandomText();
   }
 
@@ -66,6 +77,7 @@ export default class Artwork extends React.Component {
       choosenText : choosenText
     })
   }
+
 
   // makes the choosen audio file start playing
   handlePlay() {
@@ -88,16 +100,16 @@ export default class Artwork extends React.Component {
 
   // the parent render of the react component
   render() {
-    const { choosenText } = this.state
+    const { choosenText, chosenPic } = this.state
+
+    console.log(this.state)
 
     return (
       <div className="artwork-parent">
 
         <div className="svg-container">
-            <img 
-                src="https://cloudfour.com/examples/img-currentsrc/images/kitten-small.png"
-                alt = "svg-file"
-            />
+ 
+            <div dangerouslySetInnerHTML={{__html: chosenPic}}/>
         </div>
 
         <div className="text-container">
