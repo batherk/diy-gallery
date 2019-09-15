@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Artwork from './components/Artwork/Artwork'
+import Artwork from './components/Artwork/Artwork';
 
 export default class App extends React.Component {
 
@@ -19,10 +19,8 @@ export default class App extends React.Component {
   // reset artworks and checks storage for artworks built from the new themes
   handleThemeChange = function () {
     this.setState({
-      artwork1 : '',
-      artwork2 : '',
-      artwork3 : '',
-      artwork4 : ''
+      artworks : ['','','',''],
+      artworkFav : [false, false, false, false]
     })
 
     //TODO : check local storage and session storage for current combination of themes
@@ -67,29 +65,15 @@ export default class App extends React.Component {
     //TODO : mark current as fav = true
   }
   
-  // renders an artwork from state or returns a new one
+  // renders an artwork
   renderArtwork() {
-    const { currentArtworkNr, artworks, currentPictureTheme, currentSoundTheme, currentTextTheme } = this.state
-    if (artworks[currentArtworkNr]) {
-      return artworks[currentArtworkNr]
-    }
-    let newArtwork =  <Artwork
-                        picTheme = {currentPictureTheme}
-                        soundTheme = {currentSoundTheme}
-                        textTheme = {currentTextTheme}
-                      />
-    let updatedArtworks = artworks
-    updatedArtworks[currentArtworkNr] = newArtwork
-    this.setState ({
-      artworks : updatedArtworks
-    })
-    
-    // TODO : save new artwork and its positon to session storage
-
+    const { currentPictureTheme, currentSoundTheme, currentTextTheme } = this.state
     return (
-      <div>
-        {newArtwork}
-      </div>
+      <Artwork
+        picTheme = {currentPictureTheme}
+        soundTheme = {currentSoundTheme}
+        textTheme = {currentTextTheme}
+      />
     )
   }
 
@@ -108,7 +92,7 @@ export default class App extends React.Component {
           <button className="artwork-button" onClick={ () => this.handleChangeArtwork(4) }>Artwork 4</button>
         </div>
 
-        <div className="artwork-container">
+        <div className="artwork-container">         
           {this.renderArtwork()}
         </div>
 

@@ -6,11 +6,65 @@ export default class Artwork extends React.Component {
     //TODO in component: receive props picTheme, soundTheme, textTheme
     //TODO in component: generate a random artwork given the themes above
 
-  constructor(props){ 
+  constructor(props){
     super(props);
     this.state = {
-      exampleState : '',    // holds example
+      textTheme : '',
+      currentTextfile : '',
+      choosenText : '',
     }; 
+  }
+
+  componentDidMount() {
+    this.setState({
+      textTheme : this.props.textTheme
+    })
+    this.fetchTextfile()
+  }
+
+  componentDidUpdate() {
+    if(this.props.textTheme !== this.state.textTheme) {
+      this.setState({
+        textTheme : this.props.textTheme
+      })
+      this.fetchTextfile()
+    }
+  }
+
+  // fetches the correct text file based on given theme as prop
+  fetchTextfile = async function () {
+    if( this.props.textTheme === 1) {
+      let fetchedFile = await fetch('texts-theme1.json')
+      let textFile = await fetchedFile.json()
+      this.setState({
+        currentTextfile : textFile
+      })
+    }
+    if( this.props.textTheme === 2) {
+      let fetchedFile = await fetch('texts-theme2.json')
+      let textFile = await fetchedFile.json()
+      this.setState({
+        currentTextfile : textFile
+      })
+    }
+    if( this.props.textTheme === 3) {
+      let fetchedFile = await fetch('texts-theme3.json')
+      let textFile = await fetchedFile.json()
+      this.setState({
+        currentTextfile : textFile
+      })
+    }
+    this.chooseRandomText();
+  }
+
+  // pick a random text from the loaded json file containing texts
+  chooseRandomText() {
+    const { currentTextfile } = this.state
+    const texts = [currentTextfile.text1, currentTextfile.text2, currentTextfile.text3, currentTextfile.text4]
+    const choosenText = texts[Math.floor(Math.random() * 4)];
+    this.setState({
+      choosenText : choosenText
+    })
   }
 
   // makes the choosen audio file start playing
@@ -27,6 +81,7 @@ export default class Artwork extends React.Component {
 
   // the parent render of the react component
   render() {
+    const { choosenText } = this.state
 
     return (
       <div className="artwork-parent">
@@ -40,7 +95,7 @@ export default class Artwork extends React.Component {
 
         <div className="text-container">
             <p>
-                HEIOGHA TEXT
+                {choosenText}
             </p>
         </div>
         <div className="sound-container">
