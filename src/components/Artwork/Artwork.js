@@ -105,7 +105,6 @@ export default class Artwork extends React.Component {
         <div className="save-button-container">
           <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
         </div>
-
       </div>
     )
   }
