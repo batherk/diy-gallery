@@ -1,14 +1,14 @@
 @media screen and (orientation:landscape){
     .artwork-parent{
-        grid-template-areas: "image-cont text-cont text-cont" "image-cont sound-cont save-cont";
+        grid-template-areas: "image-cont text-cont " "image-cont sound-cont";
         grid-template-rows: 80% 20%; 
-        grid-template-columns: 60% 20% 20%;
+        grid-template-columns: 60% 40%;
     }
 }
 
 @media screen and (orientation:portrait){
     .artwork-parent{
-        grid-template-areas: "image-cont image-cont" "text-cont text-cont" "sound-cont save-cont";
+        grid-template-areas: "image-cont" "text-cont" "sound-cont";
         grid-template-rows: 60% 20% 10%; 
     }
 }
@@ -40,12 +40,6 @@
 }
 .sound-container{
     grid-area: sound-cont;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.save-button-container{
-    grid-area: save-cont;
     display: flex;
     justify-content: center;
     align-items: center;
