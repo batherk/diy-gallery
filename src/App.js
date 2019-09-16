@@ -11,21 +11,8 @@ export default class App extends React.Component {
       currentSoundTheme : 1,                      // holds the current sound theme
       currentTextTheme : 1,                       // holds the current text theme
       currentArtworkNr : 1,                       // holds the current artwork nr
-      artworks : ['','','',''],                   // holds the current artworks
-      artworkFav : [false, false, false, false],  // if the artworks has been saved
-      menuOpen: false
+      menuOpen: false                             // holds value controlling menu rendering
     }; 
-  }
-
-  // reset artworks and checks storage for artworks built from the new themes
-  handleThemeChange = function () {
-    this.setState({
-      artworks : ['','','',''],
-      artworkFav : [false, false, false, false]
-    })
-
-    //TODO : check local storage and session storage for current combination of themes
-    //TODO : set right artwork to stored artwork
   }
 
   // sets the new picture theme
@@ -33,7 +20,6 @@ export default class App extends React.Component {
     this.setState({
       currentPictureTheme : themeNr
     });
-    this.handleThemeChange()
   }
 
   // sets the new sounds theme and reset the artworks
@@ -41,7 +27,6 @@ export default class App extends React.Component {
     this.setState({
       currentSoundTheme : themeNr
     });
-    this.handleThemeChange()
   }
 
   // sets the new text theme
@@ -49,7 +34,6 @@ export default class App extends React.Component {
     this.setState({
       currentTextTheme : themeNr
     });
-    this.handleThemeChange()
   }
 
   // sets the new arrtwork
@@ -117,6 +101,7 @@ export default class App extends React.Component {
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Text-tema 2</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Text-tema 3</button>
         </div>
+        
       </div>
     )
   }
