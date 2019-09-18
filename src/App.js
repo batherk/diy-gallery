@@ -91,15 +91,15 @@ export default class App extends React.Component {
 
         <div className={themeChoiceContainerClass}>
           <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>Bilde-tema 1</button>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Bilde-tema 2</button>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>Bilde-tema 3</button>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Lyd-tema 1</button>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Lyd-tema 2</button>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Lyd-tema 3</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>Text-tema 1</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Text-tema 2</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Text-tema 3</button>
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>South park</button>
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden</button>
+          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>It's a sign</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Nature</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental</button>
+          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Farkost</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>Trøndelag</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Life quotes</button>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt</button>
         </div>
         
       </div>

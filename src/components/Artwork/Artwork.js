@@ -42,7 +42,7 @@ export default class Artwork extends React.Component {
       // the following code handles change in one or more of the themes
       if(this.props.picTheme !== this.state.picTheme) {
         let resetArtworksTheme = this.state.artworks;
-        var i
+        var i = 0
         for (i = 0; i < 4; i++) {
           resetArtworksTheme[i][0] = ''
         }
@@ -55,9 +55,9 @@ export default class Artwork extends React.Component {
 
       if(this.props.soundTheme !== this.state.soundTheme) {
         let resetArtworksTheme = this.state.artworks;
-        var i
-        for (i = 0; i < 4; i++) {
-          resetArtworksTheme[i][1] = ''
+        var j = 0
+        for (j = 0; j < 4; j++) {
+          resetArtworksTheme[j][1] = ''
         }
         this.setState({
           soundTheme : this.props.soundTheme,
@@ -68,9 +68,9 @@ export default class Artwork extends React.Component {
 
       if(this.props.textTheme !== this.state.textTheme) {
         let resetArtworksTheme = this.state.artworks;
-        var i
-        for (i = 0; i < 4; i++) {
-          resetArtworksTheme[i][1] = ''
+        var k
+        for (k = 0; k < 4; k++) {
+          resetArtworksTheme[k][1] = ''
         }
         this.setState({
           textTheme : this.props.textTheme,
