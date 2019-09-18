@@ -7,90 +7,155 @@ export default class Artwork extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      artNr : '',
-      textTheme : '',
-      currentTextfile : '',
-      chosenText : '',
-      picTheme : '',
-      chosenPic : [],
-      soundTheme : '',
-      chosenSound : ''
+      artworks : [['','',''], ['','',''], ['','',''], ['','','']],  
+                                  // holds paths to artwork content within the given 
+                                  // themes. Format: [picturePath, soundPath, textPath]
+      artNr : 1,                  // position of active artwork
+      textTheme : 1,              // holds current chosen text theme 
+      chosenText : '',            // holds the current text in the artwork
+      picTheme : 1,               // holds current chosen picture theme 
+      chosenPic : [],             // holds the current picture in the artwork
+      soundTheme : 1,             // holds current chosen sound theme 
+      chosenSound : ''            // holds the current sound in the artwork
     }; 
   }
 
   componentDidUpdate() {
-    if(this.props.artNr !== this.state.artNr 
-            || this.props.textTheme !== this.state.textTheme 
-            || this.props.picTheme !== this.state.picTheme
-            || this.props.soundTheme !== this.state.soundTheme)
-    {
-      this.fetchTextfile(this.props.textTheme)
-      this.fetchPicfile(this.props.picTheme)
-      // add sound fetch if necessary
+    // handles artwork change
+    if(this.props.artNr !== this.state.artNr) {
+
+      // checks if the relative artwork position already has a fil connected to it
+      if(this.state.artworks[this.props.artNr-1][0]) {
+        this.recreateArtwork(this.props.artNr-1)
+      } 
+      else {
+        this.fetchPicfile(this.props.picTheme)
+        this.fetchTextfile(this.props.textTheme)
+        this.pickSoundfile(this.props.soundTheme)
+      }
       this.setState({
-        artNr : this.props.artNr,
-        textTheme : this.props.textTheme,
-        picTheme : this.props.picTheme,
-        soundTheme : this.props.soundTheme
+        artNr : this.props.artNr
       })
+
+    } else {
+
+      // the following code handles change in one or more of the themes
+      if(this.props.picTheme !== this.state.picTheme) {
+        let resetArtworksTheme = this.state.artworks;
+        var i
+        for (i = 0; i < 4; i++) {
+          resetArtworksTheme[i][0] = ''
+        }
+        this.setState({
+          picTheme : this.props.picTheme,
+          artworks : resetArtworksTheme
+        })
+        this.fetchPicfile(this.props.picTheme);
+      }
+
+      if(this.props.soundTheme !== this.state.soundTheme) {
+        let resetArtworksTheme = this.state.artworks;
+        var i
+        for (i = 0; i < 4; i++) {
+          resetArtworksTheme[i][1] = ''
+        }
+        this.setState({
+          soundTheme : this.props.soundTheme,
+          artworks : resetArtworksTheme
+        })
+        this.pickSoundfile(this.props.soundTheme)
+      }
+
+      if(this.props.textTheme !== this.state.textTheme) {
+        let resetArtworksTheme = this.state.artworks;
+        var i
+        for (i = 0; i < 4; i++) {
+          resetArtworksTheme[i][1] = ''
+        }
+        this.setState({
+          textTheme : this.props.textTheme,
+          artworks : resetArtworksTheme
+        })
+        this.fetchTextfile(this.props.textTheme)
+      }
     }
+    console.log(this.state.artworks)
+  }
+
+  // recreates an already set artwork
+  recreateArtwork = async function (artNr) {
+    let pic = []
+    let text = ''
+    let sound = ''
+
+    const fetchedFile = await fetch(this.state.artworks[artNr][0])
+    const data = await fetchedFile.text()
+    pic = data
+
+    const fetchedText = await fetch(this.state.artworks[artNr][2])
+    const textFile = await fetchedText.json()
+    text = textFile.text
+
+    sound = this.state.artworks[artNr][1]
+
+    this.setState({
+      chosenPic : pic,
+      chosenText : text,
+      chosenSound : sound
+    })
   }
 
   // fetches the correct picture locally
   fetchPicfile = async function (chosenTheme) {
     const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
     const randPicture = picNames[Math.floor(Math.random()*4)];
-    fetch('pictures/theme'+chosenTheme.toString()+'/'+randPicture)
+    const picPath = 'pictures/theme'+chosenTheme.toString()+'/'+randPicture
+    let updatedArtworks = this.state.artworks
+    updatedArtworks[this.props.artNr-1][0] = picPath
+    fetch(picPath)
     .then(response => response.text())
     .then(data =>{
       this.setState({
-        chosenPic : data
+        chosenPic : data,
+        artworks : updatedArtworks
       })
     })    
   }
 
-  // fetches the correct text file based on given theme as prop
+  // fetches the correct sound locally
+  pickSoundfile = async function (chosenTheme) {
+    const randSound = Math.floor(Math.random()*4)+1;
+    const soundPath = "sounds/theme" +chosenTheme.toString()+ "/Sound" + randSound.toString() + ".mp3"
+    let updatedArtworks = this.state.artworks
+    updatedArtworks[this.props.artNr-1][1] = soundPath
+    this.setState({
+        chosenSound : soundPath,
+        artworks : updatedArtworks
+    })
+  }
+
+  // fetches a random text based on given theme as prop
   fetchTextfile = async function (chosenTheme) {
-    const url = 'texts-theme'+chosenTheme.toString()+'.json'
-    const fetchedFile = await fetch(url)
-    const textFile = await fetchedFile.json()
+    const textPath = 'texts/theme' + chosenTheme.toString() + '/text' + (Math.floor(Math.random() * 4)+1).toString() + '.json'
+    const fetchedText = await fetch(textPath)
+    const textFile = await fetchedText.json()
+    const text = textFile.text
+    let updatedArtworks = this.state.artworks
+    updatedArtworks[this.props.artNr-1][2] = textPath
     this.setState({
-      currentTextfile : textFile
-    })
-    this.chooseRandomText();
-  }
-
-  // pick a random text from the loaded json file containing texts
-  chooseRandomText() {
-    const { currentTextfile } = this.state
-    const texts = [currentTextfile.text1, currentTextfile.text2, currentTextfile.text3, currentTextfile.text4]
-    const chosenText = texts[Math.floor(Math.random() * 4)];
-    this.setState({
-      chosenText : chosenText
+      chosenText : text,
+      artworks : updatedArtworks
     })
   }
-
-  // makes the choosen audio file start playing
-  handlePlay() {
-    // TODO: fill with appropriate action
-  }
-
-
-  // saves the current artwork to storage
-  handleSave = function () {
-    //TODO : save the current artwork and its positon to local storage
-  }
-
 
   // the parent render of the react component
   render() {
-    const { chosenText, chosenPic } = this.state
+    const { chosenText, chosenPic, chosenSound } = this.state
 
     return (
       <div className="artwork-parent">
 
         <div className="svg-container">
- 
             <div dangerouslySetInnerHTML={{__html: chosenPic}}/>
         </div>
 
@@ -99,11 +164,9 @@ export default class Artwork extends React.Component {
                 {chosenText}
             </p>
         </div>
+
         <div className="sound-container">
-          <button className="play-button" onClick={() => this.handlePlay()}>Play sound</button>
-        </div>
-        <div className="save-button-container">
-          <button className="save-button" onClick={() => this.handleSave()}>Save artwork</button>
+          <audio ref="audio_tag" src={chosenSound} controls></audio>
         </div>
       </div>
     )
