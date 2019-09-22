@@ -3,7 +3,6 @@ import './App.css';
 import Artwork from './components/Artwork/Artwork';
 
 export default class App extends React.Component {
-
   constructor(props){ 
     super(props);
     this.state = {
@@ -15,60 +14,79 @@ export default class App extends React.Component {
     }; 
   }
 
+  componentDidMount(){
+    if(localStorage.getItem("currentArtworkNr")) {
+      this.setState({
+        currentArtworkNr : JSON.parse(localStorage.getItem("currentArtworkNr"))
+      })
+    } else {
+      localStorage.setItem("currentArtworkNr", JSON.stringify(1))
+    }
+    if(localStorage.getItem("currentPictureTheme")) {
+      this.setState({
+        currentPictureTheme : JSON.parse(localStorage.getItem("currentPictureTheme")),
+      })
+    } else {
+        localStorage.setItem("currentPictureTheme", JSON.stringify(1))
+    }
+    if(localStorage.getItem("currentSoundTheme")) {
+      this.setState({
+        currentSoundTheme : JSON.parse(localStorage.getItem("currentSoundTheme"))
+      })
+    } else {
+      localStorage.setItem("currentSoundTheme", JSON.stringify(1))
+    }
+    if(localStorage.getItem("currentTextTheme")) {
+      this.setState({
+        currentTextTheme : JSON.parse(localStorage.getItem("currentTextTheme"))
+      })
+    } else {
+      localStorage.setItem("currentTextTheme", JSON.stringify(1))
+    }
+  }
+
   // sets the new picture theme
-  handleChangePictureTheme = async function (themeNr) {
+  handleChangePictureTheme = (themeNr) => {
     this.setState({
       currentPictureTheme : themeNr
     });
+    localStorage.setItem("currentPictureTheme", JSON.stringify(themeNr))
   }
 
   // sets the new sounds theme and reset the artworks
-  handleChangeSoundTheme = async function (themeNr) {
+  handleChangeSoundTheme = (themeNr) => {
     this.setState({
       currentSoundTheme : themeNr
     });
+    localStorage.setItem("currentSoundTheme", JSON.stringify(themeNr))
   }
 
   // sets the new text theme
-  handleChangeTextTheme = async function (themeNr) {
+  handleChangeTextTheme = (themeNr) => {
     this.setState({
       currentTextTheme : themeNr
     });
+    localStorage.setItem("currentTextTheme", JSON.stringify(themeNr))
   }
 
-  // sets the new arrtwork
+  // sets the new artwork number
   handleChangeArtwork = function (artworkNr) {
     this.setState({
       currentArtworkNr : artworkNr
     });
+    localStorage.setItem("currentArtworkNr", JSON.stringify(artworkNr))
   }
 
   // Toggles hamburger menu
   menuHandler = () =>{
-    this.setState((prevState) =>{
+    this.setState((prevState) => {
       return {menuOpen:!prevState.menuOpen}
     });
   };
-  
-  // renders an artwork
-  renderArtwork() {
-    const { currentPictureTheme, currentSoundTheme, currentTextTheme, currentArtworkNr } = this.state
-    return (
-      <Artwork
-        picTheme = {currentPictureTheme}
-        soundTheme = {currentSoundTheme}
-        textTheme = {currentTextTheme}
-        artNr = {currentArtworkNr}
-      />
-    )
-  }
 
   // the parent render of the react component
   render() {
-    let themeChoiceContainerClass = "theme-choice-container";
-    if(this.state.menuOpen){
-      themeChoiceContainerClass = "theme-choice-container menu-open";
-    }
+    const { currentPictureTheme, currentSoundTheme, currentTextTheme, currentArtworkNr } = this.state
 
     return (
       <div className="parent-element">
@@ -86,18 +104,26 @@ export default class App extends React.Component {
         </div>
 
         <div className="artwork-container">         
-          {this.renderArtwork()}
+          <Artwork
+            picTheme = {currentPictureTheme}
+            soundTheme = {currentSoundTheme}
+            textTheme = {currentTextTheme}
+            artNr = {currentArtworkNr}
+          />
         </div>
 
-        <div className={themeChoiceContainerClass}>
+        <div className={this.state.menuOpen ? "theme-choice-container menu-open" : "theme-choice-container"}>
           <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
+          <h4>Bilde kategori:</h4>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>South park</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>It's a sign</button>
+          <h4>Lyd kategori:</h4>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Nature</button>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental</button>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Farkost</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>Trøndelag</button>
+          <h4>Tekst kategori:</h4>
+          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>DDE</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Life quotes</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt</button>
         </div>
