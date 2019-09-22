@@ -23,6 +23,11 @@ export default class App extends React.Component {
         currentSoundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")),
         currentTextTheme : JSON.parse(localStorage.getItem("currentTextTheme")),
       })
+    } else {
+      localStorage.setItem("currentPictureTheme", JSON.stringify(1))
+      localStorage.setItem("currentSoundTheme", JSON.stringify(1))
+      localStorage.setItem("currentTextTheme", JSON.stringify(1))
+      localStorage.setItem("currentArtworkNr", JSON.stringify(1))
     }
   }
 
@@ -32,7 +37,6 @@ export default class App extends React.Component {
       currentPictureTheme : themeNr
     });
     localStorage.setItem("currentPictureTheme", JSON.stringify(themeNr))
-
   }
 
   // sets the new sounds theme and reset the artworks
