@@ -16,12 +16,14 @@ export default class App extends React.Component {
   }
 
   componentDidMount(){
-    
-    this.setState({
-      currentPictureTheme : JSON.parse(localStorage.getItem("currentPictureTheme")),
-      currentSoundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")),
-      currentTextTheme : JSON.parse(localStorage.getItem("currentTextTheme")),
-    })
+    if(JSON.parse(localStorage.getItem("currentArtworkNr"))) {
+      this.setState({
+        currentArtworkNr : JSON.parse(localStorage.getItem("currentArtworkNr")),
+        currentPictureTheme : JSON.parse(localStorage.getItem("currentPictureTheme")),
+        currentSoundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")),
+        currentTextTheme : JSON.parse(localStorage.getItem("currentTextTheme")),
+      })
+    }
   }
 
   // sets the new picture theme
@@ -54,6 +56,7 @@ export default class App extends React.Component {
     this.setState({
       currentArtworkNr : artworkNr
     });
+    localStorage.setItem("currentArtworkNr", JSON.stringify(artworkNr))
   }
 
   // Toggles hamburger menu
@@ -78,10 +81,6 @@ export default class App extends React.Component {
 
   // the parent render of the react component
   render() {
-    let themeChoiceContainerClass = "theme-choice-container";
-    if(this.state.menuOpen){
-      themeChoiceContainerClass = "theme-choice-container menu-open";
-    }
 
     return (
       <div className="parent-element">
@@ -102,14 +101,17 @@ export default class App extends React.Component {
           {this.renderArtwork()}
         </div>
 
-        <div className={themeChoiceContainerClass}>
+        <div className={this.state.menuOpen ? "theme-choice-container menu-open" : "theme-choice-container"}>
           <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
+          <h4>Bilde kategori:</h4>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>South park</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden</button>
           <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>It's a sign</button>
+          <h4>Lyd kategori:</h4>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Nature</button>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental</button>
           <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Farkost</button>
+          <h4>Tekst kategori:</h4>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>Trøndelag</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Life quotes</button>
           <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt</button>
