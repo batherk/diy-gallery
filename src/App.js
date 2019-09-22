@@ -15,11 +15,22 @@ export default class App extends React.Component {
     }; 
   }
 
+  componentDidMount(){
+    
+    this.setState({
+      currentPictureTheme : JSON.parse(localStorage.getItem("currentPictureTheme")),
+      currentSoundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")),
+      currentTextTheme : JSON.parse(localStorage.getItem("currentTextTheme")),
+    })
+  }
+
   // sets the new picture theme
   handleChangePictureTheme = async function (themeNr) {
     this.setState({
       currentPictureTheme : themeNr
     });
+    localStorage.setItem("currentPictureTheme", JSON.stringify(themeNr))
+
   }
 
   // sets the new sounds theme and reset the artworks
@@ -27,6 +38,7 @@ export default class App extends React.Component {
     this.setState({
       currentSoundTheme : themeNr
     });
+    localStorage.setItem("currentSoundTheme", JSON.stringify(themeNr))
   }
 
   // sets the new text theme
@@ -34,6 +46,7 @@ export default class App extends React.Component {
     this.setState({
       currentTextTheme : themeNr
     });
+    localStorage.setItem("currentTextTheme", JSON.stringify(themeNr))
   }
 
   // sets the new arrtwork

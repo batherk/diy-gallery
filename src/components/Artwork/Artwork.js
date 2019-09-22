@@ -18,6 +18,35 @@ export default class Artwork extends React.Component {
       soundTheme : 1,             // holds current chosen sound theme 
       chosenSound : ''            // holds the current sound in the artwork
     }; 
+  } 
+
+  componentDidMount() {
+    this.onLoad()
+  }
+
+  onLoad = async () => {
+    const sessionCombination = await sessionStorage.getItem("sessionCombination")
+    const artworks = await JSON.parse(sessionCombination)
+    this.setState({
+      artworks : artworks
+    })
+    if (this.state.artworks[this.props.artNr-1][0]){
+      console.log("use session STor")
+      console.log(this.props.artNr)
+      console.log(this.state.artworks[this.props.artNr-1])
+      this.recreateArtwork(this.props.artNr-1)
+    }
+    else{
+      console.log("not session stor")
+      this.pickSoundfile(this.props.soundTheme)
+      this.fetchPicfile(this.props.picTheme)
+      this.fetchTextfile(this.props.textTheme)
+    }
+    this.setState({
+      picTheme: this.props.picTheme,
+      soundTheme: this.props.soundTheme,
+      textTheme: this.props.textTheme
+    })
   }
 
   componentDidUpdate() {
@@ -70,7 +99,7 @@ export default class Artwork extends React.Component {
         let resetArtworksTheme = this.state.artworks;
         var k
         for (k = 0; k < 4; k++) {
-          resetArtworksTheme[k][1] = ''
+          resetArtworksTheme[k][2] = ''
         }
         this.setState({
           textTheme : this.props.textTheme,
@@ -79,7 +108,10 @@ export default class Artwork extends React.Component {
         this.fetchTextfile(this.props.textTheme)
       }
     }
-    console.log(this.state.artworks)
+  }
+
+  updateSessionStorage(){
+    sessionStorage.setItem("sessionCombination", JSON.stringify(this.state.artworks))
   }
 
   // recreates an already set artwork
@@ -119,7 +151,8 @@ export default class Artwork extends React.Component {
         chosenPic : data,
         artworks : updatedArtworks
       })
-    })    
+    })
+    this.updateSessionStorage();
   }
 
   // fetches the correct sound locally
@@ -132,6 +165,7 @@ export default class Artwork extends React.Component {
         chosenSound : soundPath,
         artworks : updatedArtworks
     })
+    this.updateSessionStorage()
   }
 
   // fetches a random text based on given theme as prop
@@ -146,6 +180,7 @@ export default class Artwork extends React.Component {
       chosenText : text,
       artworks : updatedArtworks
     })
+    this.updateSessionStorage()
   }
 
   // the parent render of the react component
