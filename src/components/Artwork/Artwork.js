@@ -3,149 +3,155 @@ import './Artwork.css';
 
 
 export default class Artwork extends React.Component {
-
   constructor(props){
     super(props);
     this.state = {
       artworks : [['','',''], ['','',''], ['','',''], ['','','']],  
                                   // holds paths to artwork content within the given 
                                   // themes. Format: [picturePath, soundPath, textPath]
-      artNr : 1,                  // position of active artwork
-      textTheme : 1,              // holds current chosen text theme 
-      chosenText : '',            // holds the current text in the artwork
-      picTheme : 1,               // holds current chosen picture theme 
       chosenPic : [],             // holds the current picture in the artwork
-      soundTheme : 1,             // holds current chosen sound theme 
-      chosenSound : ''            // holds the current sound in the artwork
+      chosenSound : '',           // holds the current sound in the artwork
+      chosenText : '',            // holds the current text in the artwork
     }; 
+  } 
+
+  componentDidMount() {
+    if(sessionStorage.getItem("sessionCombination")) { 
+      this.fetchSessionStorage()
+    } else {
+      this.setPicture()
+      this.setSound()
+      this.setText()
+    }
   }
 
   componentDidUpdate() {
-    // handles artwork change
-    if(this.props.artNr !== this.state.artNr) {
+    const { artworks, artNr, picTheme, soundTheme, textTheme, mounted } = this.state
 
-      // checks if the relative artwork position already has a fil connected to it
-      if(this.state.artworks[this.props.artNr-1][0]) {
-        this.recreateArtwork(this.props.artNr-1)
-      } 
-      else {
-        this.fetchPicfile(this.props.picTheme)
-        this.fetchTextfile(this.props.textTheme)
-        this.pickSoundfile(this.props.soundTheme)
-      }
-      this.setState({
-        artNr : this.props.artNr
-      })
+    let resetArtworks = artworks
 
-    } else {
-
-      // the following code handles change in one or more of the themes
-      if(this.props.picTheme !== this.state.picTheme) {
-        let resetArtworksTheme = this.state.artworks;
-        var i = 0
-        for (i = 0; i < 4; i++) {
-          resetArtworksTheme[i][0] = ''
-        }
-        this.setState({
-          picTheme : this.props.picTheme,
-          artworks : resetArtworksTheme
-        })
-        this.fetchPicfile(this.props.picTheme);
-      }
-
-      if(this.props.soundTheme !== this.state.soundTheme) {
-        let resetArtworksTheme = this.state.artworks;
-        var j = 0
-        for (j = 0; j < 4; j++) {
-          resetArtworksTheme[j][1] = ''
-        }
-        this.setState({
-          soundTheme : this.props.soundTheme,
-          artworks : resetArtworksTheme
-        })
-        this.pickSoundfile(this.props.soundTheme)
-      }
-
-      if(this.props.textTheme !== this.state.textTheme) {
-        let resetArtworksTheme = this.state.artworks;
-        var k
-        for (k = 0; k < 4; k++) {
-          resetArtworksTheme[k][1] = ''
-        }
-        this.setState({
-          textTheme : this.props.textTheme,
-          artworks : resetArtworksTheme
-        })
-        this.fetchTextfile(this.props.textTheme)
-      }
+    if (this.props.artNr !== artNr) {
+      this.setState({ artNr : this.props.artNr })
+      this.setPicture(this.props.artNr, this.props.picTheme)
+      this.setSound(this.props.artNr, this.props.soundTheme)
+      this.setText(this.props.artNr, this.props.textTheme)
     }
-    console.log(this.state.artworks)
+
+    if (this.props.picTheme !== picTheme) {
+      var i = 0
+      for (i = 0; i < 4; i++) {
+        resetArtworks[i][0] = ''
+      }
+      this.setState({ 
+        picTheme : this.props.picTheme,
+        artworks : resetArtworks 
+      })
+      this.setPicture()
+    }
+
+    if (this.props.soundTheme !== soundTheme) {
+      var j = 0
+      for (j = 0; j < 4; j++) {
+        resetArtworks[j][1] = ''
+      }
+      this.setState({ 
+        soundTheme : this.props.soundTheme, 
+        artworks : resetArtworks })
+      this.setSound()
+    }
+
+    if (this.props.textTheme !== textTheme) {
+      var k
+      for (k = 0; k < 4; k++) {
+        resetArtworks[k][2] = ''
+      }
+      this.setState({ 
+        textTheme : this.props.textTheme, 
+        artworks : resetArtworks 
+      })
+      this.setText()
+    }
   }
 
-  // recreates an already set artwork
-  recreateArtwork = async function (artNr) {
-    let pic = []
-    let text = ''
-    let sound = ''
+  fetchSessionStorage = async () => {
+    const artworks = await JSON.parse(sessionStorage.getItem("sessionCombination"));
+    await this.setState({ artworks : artworks })
+    this.setPicture()
+    this.setSound()
+    this.setText()
+  }
 
-    const fetchedFile = await fetch(this.state.artworks[artNr][0])
-    const data = await fetchedFile.text()
-    pic = data
-
-    const fetchedText = await fetch(this.state.artworks[artNr][2])
-    const textFile = await fetchedText.json()
-    text = textFile.text
-
-    sound = this.state.artworks[artNr][1]
-
+  updateSessionStorage = () => {
+    sessionStorage.setItem("sessionCombination", JSON.stringify(this.state.artworks))
+  }
+  
+  // fetches the correct picture locally
+  setPicture = async () => {
+    const { artNr, picTheme } = this.props;
+    const { artworks } = this.state;
+    let picturePath = '';
+    if (artworks[artNr-1][0]) {
+      picturePath = artworks[artNr-1][0];
+    } else {
+      const theme = picTheme.toString()
+      const randomFile = Math.floor(Math.random()*4).toString()
+      picturePath = 'pictures/theme' + theme + '/feed' + randomFile + '.svg';
+    }
+    let updatedArtworks = artworks;
+    updatedArtworks[artNr-1][0] = picturePath;
+    const fetchedPic = await fetch(picturePath)
+    const data = await fetchedPic.text()
+    const pic = data
     this.setState({
       chosenPic : pic,
-      chosenText : text,
-      chosenSound : sound
+      artworks : updatedArtworks
     })
-  }
-
-  // fetches the correct picture locally
-  fetchPicfile = async function (chosenTheme) {
-    const picNames = ['feed.svg', 'feed2.svg', 'feed3.svg', 'feed4.svg']
-    const randPicture = picNames[Math.floor(Math.random()*4)];
-    const picPath = 'pictures/theme'+chosenTheme.toString()+'/'+randPicture
-    let updatedArtworks = this.state.artworks
-    updatedArtworks[this.props.artNr-1][0] = picPath
-    fetch(picPath)
-    .then(response => response.text())
-    .then(data =>{
-      this.setState({
-        chosenPic : data,
-        artworks : updatedArtworks
-      })
-    })    
+    this.updateSessionStorage();
   }
 
   // fetches the correct sound locally
-  pickSoundfile = async function (chosenTheme) {
-    const randSound = Math.floor(Math.random()*4)+1;
-    const soundPath = "sounds/theme" +chosenTheme.toString()+ "/Sound" + randSound.toString() + ".mp3"
-    let updatedArtworks = this.state.artworks
-    updatedArtworks[this.props.artNr-1][1] = soundPath
+  setSound = async () => {
+    const { artNr, soundTheme } = this.props;
+    const { artworks } = this.state;
+    let soundPath = ''
+    if (artworks[artNr-1][1]) {
+      soundPath = artworks[artNr-1][1];
+    } else {
+      const theme = soundTheme.toString()
+      const randomFile = Math.floor(Math.random()*4+1).toString()
+      soundPath = "sounds/theme" + theme + "/Sound" + randomFile + ".mp3"
+    }
+    let updatedArtworks = artworks
+    updatedArtworks[artNr-1][1] = soundPath
     this.setState({
         chosenSound : soundPath,
         artworks : updatedArtworks
     })
+    this.updateSessionStorage()
   }
 
   // fetches a random text based on given theme as prop
-  fetchTextfile = async function (chosenTheme) {
-    const textPath = 'texts/theme' + chosenTheme.toString() + '/text' + (Math.floor(Math.random() * 4)+1).toString() + '.json'
+  setText = async () => {
+    const { artNr, textTheme } = this.props;
+    const { artworks } = this.state;
+    let textPath = ''
+    if (artworks[artNr-1][2]) {
+      textPath = artworks[artNr-1][2];
+    } else {
+      const theme = textTheme.toString()
+      const randomFile = (Math.floor(Math.random() * 4)+1).toString()
+      textPath = 'texts/theme' + theme + '/text' + randomFile + '.json'
+    }
     const fetchedText = await fetch(textPath)
     const textFile = await fetchedText.json()
     const text = textFile.text
-    let updatedArtworks = this.state.artworks
+    let updatedArtworks = artworks
     updatedArtworks[this.props.artNr-1][2] = textPath
     this.setState({
       chosenText : text,
       artworks : updatedArtworks
     })
+    this.updateSessionStorage()
   }
 
   // the parent render of the react component
