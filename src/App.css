@@ -2,38 +2,29 @@
   text-align: center;
 }
 header {
-  background-color: lightblue;
-  border-bottom: solid 2px dodgerblue;
-  font-size: 2vw;
+  background-color: darkred;
+  border-bottom: solid 2px grey;
+  color: white;
+  text-align: left;
+  padding: 5px;
+  font-size: 300%;
+  font-weight: 800;
+  font-family: fantasy;
 }
-.picture-theme-button {
-  background-color: yellow;
+.theme-button {
+  background-color: #ffffff;
+  border-radius: 5px;
 }
-.picture-theme-button:hover {
-  background-color: lightyellow;
+.theme-button:hover {
+  background-color: #e6f9ff;
+  cursor: pointer;
+  border-radius: 5px;
 }
-
-.sound-theme-button {
-  background-color: green;
-}
-.sound-theme-button:hover {
-  background-color: lightgreen;
-}
-
-.text-theme-button {
-  background-color: red;
-}
-.text-theme-button:hover {
-  background-color: lightcoral;
-}
-.picture-choice-button {
-  background-color: lightcyan;
-}
-.sound-choice-button {
-  background-color: lightpink;
-}
-.text-choice-button {
-  background-color: lightgrey;
+.choosen-button {
+  background-color: #b3ecff;
+  color: #00ace6;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 
@@ -108,7 +99,7 @@ header {
 /* Desktop, Pad landscape */
 @media screen and (min-width:768px) and (orientation:landscape){
   body{
-    background-color: orange;
+    background-color: #fffae6;
   }
   .menu-button, .close-menu{
     display:none;
@@ -143,6 +134,14 @@ header {
 button.artwork-button{
   height: 100%;
   width: 25%;
+  cursor: pointer;
 }
 
+button.choosen-artwork-button {
+  height: 100%;
+  width: 25%;
+  background-color: #b3ecff;
+  color: #00ace6;
+  font-weight: bold;
+}
 
