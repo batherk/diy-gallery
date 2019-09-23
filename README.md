@@ -7,9 +7,9 @@ elements, and the website will randomly generate four different artworks, displa
 ## Motivation
 The project is a part of our submission for the subject IT2810 Webutvikling.
 
-## Technology stack
+## Built with 
 
-#### Framworks:
+#### Framworks
 <ul>
 <li><a href="https://github.com/facebook/create-react-app">React</a> - Web framework for JavaScript</li>
 <li><a href="https://jestjs.io">Jest</a> - JavaScript testing framework</li>
