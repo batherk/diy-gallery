@@ -92,11 +92,10 @@ export default class App extends React.Component {
       <div className="parent-element">
 
         <header>
-          <button className={this.state.menuOpen ? "menu-button menu-open" : "menu-button"} onClick={ () => this.menuHandler()}>
-            <hr></hr>
-            <hr></hr>
-            <hr></hr>
-          </button>
+          <div className={this.state.menuOpen ? "hamburger-cont menu-open" : "hamburger-cont"} onClick={ () => this.menuHandler()}>
+            <button className="menu-button"></button>
+            <div className="hamburger"><div></div></div>
+          </div>
           <h1>Header</h1>
         </header>
 

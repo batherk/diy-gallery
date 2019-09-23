@@ -6,6 +6,7 @@
   --orange-deep: #FF5A09;
   --orange-light: #ec7f37;
   --font-family: "Segoe UI", "Open Sans", "Helvetica Neue",sans-serif;
+  --transition: all 0.4s ease-in-out;
 }
 
 body {
