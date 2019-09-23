@@ -92,15 +92,27 @@ export default class App extends React.Component {
       <div className="parent-element">
 
         <header>
-          <button className="menu-button" onClick={ () => this.menuHandler()}>Menu</button>
-          EXAMPLE HEADER..
+          <button className="menu-button" onClick={ () => this.menuHandler()}>
+            <hr></hr>
+            <hr></hr>
+            <hr></hr>
+          </button>
+          <h1>Header</h1>
         </header>
 
         <div className="artwork-choice-container">
-          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(1) }>Artwork 1</button>
-          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(2) }>Artwork 2</button>
-          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(3) }>Artwork 3</button>
-          <button className="artwork-button" onClick={ () => this.handleChangeArtwork(4) }>Artwork 4</button>
+          <button className={"artwork-button" + (currentArtworkNr === 1 ? " chosen" : "")}
+            onClick={ () => this.handleChangeArtwork(1) }>Artwork 1
+          </button>
+          <button className={"artwork-button" + (currentArtworkNr === 2 ? " chosen" : "")}
+            onClick={ () => this.handleChangeArtwork(2) }>Artwork 2
+          </button>
+          <button className={"artwork-button" + (currentArtworkNr === 3 ? " chosen" : "")}
+            onClick={ () => this.handleChangeArtwork(3) }>Artwork 3
+          </button>
+          <button className={"artwork-button" + (currentArtworkNr === 4 ? " chosen" : "")}
+            onClick={ () => this.handleChangeArtwork(4) }>Artwork 4
+          </button>
         </div>
 
         <div className="artwork-container">         
@@ -113,19 +125,41 @@ export default class App extends React.Component {
         </div>
 
         <div className={this.state.menuOpen ? "theme-choice-container menu-open" : "theme-choice-container"}>
+
           <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
+
           <h4>Bilde kategori:</h4>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(1) }>South park</button>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden</button>
-          <button className="picture-theme-button" onClick={ () => this.handleChangePictureTheme(3) }>It's a sign</button>
+          <button className={currentPictureTheme === 1 ? "choosen-button" : "theme-button"}
+            onClick={ () => this.handleChangePictureTheme(1) }>South park
+          </button>
+          <button className={currentPictureTheme === 2 ? "choosen-button" : "theme-button"} 
+            onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden
+            </button>
+          <button className={currentPictureTheme === 3 ? "choosen-button" : "theme-button"} 
+            onClick={ () => this.handleChangePictureTheme(3) }>It's a sign
+          </button>
+
           <h4>Lyd kategori:</h4>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(1) }>Nature</button>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental</button>
-          <button className="sound-theme-button" onClick={ () => this.handleChangeSoundTheme(3) }>Farkost</button>
+          <button className={currentSoundTheme === 1 ? "choosen-button" : "theme-button"}
+            onClick={ () => this.handleChangeSoundTheme(1) }>Nature
+          </button>
+          <button className={currentSoundTheme === 2 ? "choosen-button" : "theme-button"} 
+            onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental
+          </button>
+          <button className={currentSoundTheme === 3 ? "choosen-button" : "theme-button"} 
+            onClick={ () => this.handleChangeSoundTheme(3) }>Farkost
+          </button>
+
           <h4>Tekst kategori:</h4>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(1) }>DDE</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(2) }>Life quotes</button>
-          <button className="text-theme-button" onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt</button>
+          <button className={currentTextTheme === 1 ? "choosen-button" : "theme-button"}
+            onClick={ () => this.handleChangeTextTheme(1) }>DDE
+          </button>
+          <button className={currentTextTheme === 2 ? "choosen-button" : "theme-button"}
+            onClick={ () => this.handleChangeTextTheme(2) }>Life quotes
+          </button>
+          <button className={currentTextTheme === 3 ? "choosen-button" : "theme-button"}
+            onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt
+          </button>
         </div>
         
       </div>
