@@ -14,7 +14,7 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 #### Responsive Web Design
 #### Node.js and NPM
 #### Test
-#### Installation and server setup
+#### Deployment and server setup
 
 ## Built with 
 
