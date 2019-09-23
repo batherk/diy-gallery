@@ -27,6 +27,7 @@
 
 
 .svg-container{
+    margin: 10%;
     grid-area: image-cont;
     display: flex;
     justify-content: center;
