@@ -92,21 +92,25 @@ export default class App extends React.Component {
       <div className="parent-element">
 
         <header>
-          The artistic web
-          <button className="menu-button" onClick={ () => this.menuHandler()}>Menu</button>
+          <button className="menu-button" onClick={ () => this.menuHandler()}>
+            <hr></hr>
+            <hr></hr>
+            <hr></hr>
+          </button>
+          <h1>Header</h1>
         </header>
 
         <div className="artwork-choice-container">
-          <button className={currentArtworkNr === 1 ? "choosen-artwork-button" : "artwork-button"}
+          <button className={"artwork-button" + (currentArtworkNr === 1 ? " chosen" : "")}
             onClick={ () => this.handleChangeArtwork(1) }>Artwork 1
           </button>
-          <button className={currentArtworkNr === 2 ? "choosen-artwork-button" : "artwork-button"} 
+          <button className={"artwork-button" + (currentArtworkNr === 2 ? " chosen" : "")}
             onClick={ () => this.handleChangeArtwork(2) }>Artwork 2
           </button>
-          <button className={currentArtworkNr === 3 ? "choosen-artwork-button" : "artwork-button"}
+          <button className={"artwork-button" + (currentArtworkNr === 3 ? " chosen" : "")}
             onClick={ () => this.handleChangeArtwork(3) }>Artwork 3
           </button>
-          <button className={currentArtworkNr === 4 ? "choosen-artwork-button" : "artwork-button"}
+          <button className={"artwork-button" + (currentArtworkNr === 4 ? " chosen" : "")}
             onClick={ () => this.handleChangeArtwork(4) }>Artwork 4
           </button>
         </div>

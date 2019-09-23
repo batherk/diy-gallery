@@ -1,42 +1,87 @@
+/* For whole document*/
+
+:root{
+  --charcoal: #373737;
+  --grey: #767676;
+  --grey-light: #E6E6E6;
+  --orange-rusty: #be4f0c;
+  --orange-deep: #FF5A09;
+  --orange-light: #ec7f37;
+}
 .parent-element {
   text-align: center;
+  background-color:var(--charcoal);
+  font-style: "Open Sans";
+  color: var(--grey-light);
+  font-weight: 100;
 }
+
+/* Header */
+
 header {
-  background-color: darkred;
-  border-bottom: solid 2px grey;
-  color: white;
-  text-align: left;
-  padding: 5px;
-  font-size: 300%;
-  font-weight: 800;
-  font-family: fantasy;
+  background-color: transparent;
+  color: var(--orange-deep);
+  font-size: 6vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.theme-button {
-  background-color: #ffffff;
-  border-radius: 5px;
+
+header h1{
+  font-size: 6vh;
+  margin:2px 5%;
+  font-weight: 100;
 }
-.theme-button:hover {
-  background-color: #e6f9ff;
-  cursor: pointer;
-  border-radius: 5px;
+
+hr{
+  border-color:var(--grey-light);
 }
-.choosen-button {
-  background-color: #b3ecff;
-  color: #00ace6;
-  font-weight: bold;
-  border-radius: 5px;
+
+/* Buttons */ 
+
+button:focus {outline:0;}
+
+/* Artwork buttons*/
+
+button.artwork-button{
+  background-color:transparent;
+  border: 3px solid var(--grey-light);
+  border-width: 3px;
+  color: var(--grey-light)
+}
+
+button.artwork-button.clicked{
+  border: 3px solid var(--orange-deep);
+}
+
+button.artwork-button.chosen {
+  border: 3px solid var(--orange-deep);
+}
+
+button.artwork-button.chosen:hover {
+  border: 3px solid var(--orange-deep);
+}
+
+button.artwork-button:hover{
+  border: 3px solid var(--orange-light);
+}
+button.menu-button{
+  height: 6vh;
+  width: 6vw;
+  margin-left: 5%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding:0;
+  border: 0px;
+  background-color: transparent;
+}
+
+button.menu-button hr{
+  margin:2px;
+  width: 6vw;
 }
 
 
-/* example of timed transition, nice to have if we want to implement this somewhere */
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /* Layout for different screen types*/
 
@@ -50,6 +95,11 @@ header {
     flex-direction: column;
   }
 
+  button.menu-button{
+    display:flex;
+    flex-direction: column;
+  }
+
   .theme-choice-container{
     order: 1;
     position: fixed;
@@ -58,9 +108,9 @@ header {
     flex-direction: column;
     height: 100vh;
     transform:translateX(-100%);
-    /*transition: transform ease-in-out 0.3s;*/
+    transition: transform ease-in-out 0.3s;
     width: 60vw;
-    background-color: #f4f4f4;
+    background-color: var(--grey);
   }
 
   .theme-choice-container.menu-open{
@@ -77,30 +127,24 @@ header {
     order: 3;
     height: 10vh;
   }
+
+  button.artwork-button{
+    height: 100%;
+    width: 25%;
+  }
 }
 
 
 /* Mobile portrait, Pad portrait*/
-@media screen and (orientation:portrait){
-  body{
-    background-color: green;
-  }  
-}
+@media screen and (orientation:portrait){}
 
 
 /* Mobile landscape*/
-@media screen and (max-width:767px) and (orientation:landscape){
-  body{
-    background-color: yellow;
-  }
-}
+@media screen and (max-width:767px) and (orientation:landscape){}
 
 
 /* Desktop, Pad landscape */
 @media screen and (min-width:768px) and (orientation:landscape){
-  body{
-    background-color: #fffae6;
-  }
   .menu-button, .close-menu{
     display:none;
   }
@@ -128,20 +172,28 @@ header {
   .artwork-container{
     grid-area:artwork;
   }
-  
+
+  button.artwork-button{
+    height: 90%;
+    margin: 0.5%;
+    width: 24%;
+    padding: 0;
+  }
 }
 
-button.artwork-button{
-  height: 100%;
-  width: 25%;
-  cursor: pointer;
-}
 
-button.choosen-artwork-button {
-  height: 100%;
-  width: 25%;
-  background-color: #b3ecff;
-  color: #00ace6;
-  font-weight: bold;
-}
 
+
+
+
+
+/* example of timed transition, nice to have if we want to implement this somewhere
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*/
