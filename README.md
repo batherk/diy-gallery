@@ -18,7 +18,7 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 #### Dependencies 
 <ul>
 <li><a href="https://nodejs.dev/">Node.js</a> - JavaScript runtime environment</li>
-<li>>JSX - Syntax extension for JavaScript</li>
+<li><a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> - Syntax extension for JavaScript</li>
 </ul>
 
 ## Development setup
