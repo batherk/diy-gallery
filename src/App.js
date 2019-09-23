@@ -130,7 +130,7 @@ export default class App extends React.Component {
 
           <h4>Bilde kategori:</h4>
           <button className={currentPictureTheme === 1 ? "choosen-button" : "theme-button"}
-            onClick={ () => this.handleChangePictureTheme(1) }>South park
+            onClick={ () => this.handleChangePictureTheme(1) }>Company Logos
           </button>
           <button className={currentPictureTheme === 2 ? "choosen-button" : "theme-button"} 
             onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden
