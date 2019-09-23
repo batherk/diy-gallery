@@ -1,6 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project
 
-## Available Scripts
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and displays a responsive website 
+which let users interact with different SVG-elements, sounds and texts to create artworks. Users can select desired categories for all 
+elements, and the website will randomly generate four different artworks, displayed in separate tabs.
+
+## Motivation
+The project is a part of our submission for the subject IT2810 Webutvikling.
+
+## Project requirements
+#### React
+#### AJAX
+#### HTML Web Storage
+#### Responsive Web Design
+#### Node.js and NPM
+#### Test
+#### Deployment and server setup
+
+## Built with 
+
+#### Frameworks
+<ul>
+<li><a href="https://github.com/facebook/create-react-app">React</a> - Web framework for JavaScript</li>
+<li><a href="https://jestjs.io">Jest</a> - JavaScript testing framework</li>
+</ul>
+
+#### Dependencies 
+<ul>
+<li><a href="https://nodejs.dev/">Node.js</a> - JavaScript runtime environment</li>
+<li><a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> - Syntax extension for JavaScript</li>
+</ul>
+
+## React directory structure
+```
+├── node_modules
+│       └── . . .
+├── public
+│   ├── pictures
+│   │   └── . . .
+│   ├── sounds
+│   │   └── . . .
+│   └── texts
+│        └── . . .
+└── src
+    ├── components
+    │   └── Artwork
+    │       ├── css
+    │       │   └── . . .
+    │       └── js
+    │           └── . . .
+    ├── App.css
+    ├── App.js
+    ├── index.css
+    ├── index.js
+    └── App.test.js
+```
+
+## Development setup
 
 In the project directory, you can run:
 
@@ -66,3 +121,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Credits
+
+Credits to:
+* @olahop
+* @bjornthe
+* @larsmagu
