@@ -7,6 +7,15 @@ elements, and the website will randomly generate four different artworks, displa
 ## Motivation
 The project is a part of our submission for the subject IT2810 Webutvikling.
 
+## Project requirements
+#### React
+#### AJAX
+#### HTML Web Storage
+#### Responsive Web Design
+#### Node.js and NPM
+#### Test
+#### Installation and server setup
+
 ## Built with 
 
 #### Framworks
@@ -112,8 +121,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-## Test
 
 ## Credits
 
