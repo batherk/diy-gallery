@@ -33,14 +33,14 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 ## React directory structure
 ```
 ├── node_modules
-│   │   └── . . .
+│       └── . . .
 ├── public
 │   ├── pictures
 │   │   └── . . .
 │   ├── sounds
 │   │   └── . . .
 │   └── texts
-│   │   └── . . .
+│        └── . . .
 └── src
     ├── components
     │   └── Artwork
