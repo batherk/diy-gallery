@@ -16,6 +16,10 @@
   font-weight: 100;
 }
 
+h4{
+  font-weight: 100;
+}
+
 /* Header */
 
 header {
@@ -30,7 +34,7 @@ header {
 header h1{
   font-size: 6vh;
   margin:2px 5%;
-  font-weight: 100;
+  font-weight:100;
 }
 
 hr{
@@ -43,28 +47,37 @@ button:focus {outline:0;}
 
 /* Artwork buttons*/
 
-button.artwork-button{
+button.artwork-button, button.theme-button{
   background-color:transparent;
   border: 3px solid var(--grey-light);
-  border-width: 3px;
   color: var(--grey-light)
 }
 
-button.artwork-button.clicked{
-  border: 3px solid var(--orange-deep);
+button.artwork-button{
+  border-width: 3px;
 }
 
-button.artwork-button.chosen {
-  border: 3px solid var(--orange-deep);
+button.theme-button{
+  border-width: 1px;
+  margin:5px;
+  height: 5%;
 }
 
-button.artwork-button.chosen:hover {
-  border: 3px solid var(--orange-deep);
+button.artwork-button.chosen, button.theme-button.chosen {
+  border-color: var(--orange-deep);
 }
 
-button.artwork-button:hover{
-  border: 3px solid var(--orange-light);
+button.artwork-button.chosen:hover, button.theme-button.chosen:hover {
+  border-color: var(--orange-deep);
 }
+
+button.artwork-button:hover, button.theme-button:hover{
+  border-color: var(--orange-light);
+}
+
+
+/*Menu*/
+
 button.menu-button{
   height: 6vh;
   width: 6vw;
@@ -111,6 +124,7 @@ button.menu-button hr{
     transition: transform ease-in-out 0.3s;
     width: 60vw;
     background-color: var(--grey);
+    overflow-y:auto;
   }
 
   .theme-choice-container.menu-open{
@@ -159,6 +173,8 @@ button.menu-button hr{
     display:flex;
     flex-direction: column;
     grid-area:categories;
+    height: 100%;
+    overflow-y: auto;
   }
   
   header{
