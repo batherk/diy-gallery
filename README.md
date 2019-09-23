@@ -1,4 +1,9 @@
+## Project 2
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project displays a responsive website that lets the user interact with differene SVG-elements, sounds and texts to create artworks.
+Users are able to select desired categories for all elements and the website will randomly generate four different artworks, displayed 
+in separate tabs.
 
 ## Available Scripts
 
