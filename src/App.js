@@ -92,11 +92,10 @@ export default class App extends React.Component {
       <div className="parent-element">
 
         <header>
-          <button className="menu-button" onClick={ () => this.menuHandler()}>
-            <hr></hr>
-            <hr></hr>
-            <hr></hr>
-          </button>
+          <div className={this.state.menuOpen ? "hamburger-cont menu-open" : "hamburger-cont"} onClick={ () => this.menuHandler()}>
+            <button className="menu-button"></button>
+            <div className="hamburger"><div></div></div>
+          </div>
           <h1>The DIY Gallery</h1>
         </header>
 
@@ -125,9 +124,6 @@ export default class App extends React.Component {
         </div>
 
         <div className={this.state.menuOpen ? "theme-choice-container menu-open" : "theme-choice-container"}>
-
-          <button className="close-menu" onClick={ () => this.menuHandler()}>CloseMenu</button>
-
           <h4>Bilde kategori:</h4>
           <button className={"theme-button" + (currentPictureTheme === 1 ? " chosen" : "")}
             onClick={ () => this.handleChangePictureTheme(1) }>Logo
