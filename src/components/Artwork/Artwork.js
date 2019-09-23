@@ -165,7 +165,7 @@ export default class Artwork extends React.Component {
         </div>
 
         <div className="text-container">
-            <p>
+            <p className="chosen-text">
                 {chosenText}
             </p>
         </div>
