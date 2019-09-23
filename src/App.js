@@ -6,10 +6,10 @@ export default class App extends React.Component {
   constructor(props){ 
     super(props);
     this.state = {
+      currentArtworkNr : 1,                       // holds the current artwork nr
       currentPictureTheme : 1,                    // holds the current picture theme
       currentSoundTheme : 1,                      // holds the current sound theme
       currentTextTheme : 1,                       // holds the current text theme
-      currentArtworkNr : 1,                       // holds the current artwork nr
       menuOpen: false                             // holds value controlling menu rendering
     }; 
   }
@@ -97,7 +97,7 @@ export default class App extends React.Component {
             <hr></hr>
             <hr></hr>
           </button>
-          <h1>Header</h1>
+          <h1>The DIY Gallery</h1>
         </header>
 
         <div className="artwork-choice-container">
@@ -130,21 +130,21 @@ export default class App extends React.Component {
 
           <h4>Bilde kategori:</h4>
           <button className={"theme-button" + (currentPictureTheme === 1 ? " chosen" : "")}
-            onClick={ () => this.handleChangePictureTheme(1) }>Company Logos
+            onClick={ () => this.handleChangePictureTheme(1) }>Logo
           </button>
           <button className={"theme-button" + (currentPictureTheme === 2 ? " chosen" : "")} 
-            onClick={ () => this.handleChangePictureTheme(2) }>Dyrenes verden
+            onClick={ () => this.handleChangePictureTheme(2) }>Dyr
             </button>
           <button className={"theme-button" + (currentPictureTheme === 3 ? " chosen" : "")} 
-            onClick={ () => this.handleChangePictureTheme(3) }>It's a sign
+            onClick={ () => this.handleChangePictureTheme(3) }>Skilt
           </button>
 
           <h4>Lyd kategori:</h4>
           <button className={"theme-button" + (currentSoundTheme === 1 ? " chosen" : "")}
-            onClick={ () => this.handleChangeSoundTheme(1) }>Nature
+            onClick={ () => this.handleChangeSoundTheme(1) }>Natur
           </button>
           <button className={"theme-button" + (currentSoundTheme === 2 ? " chosen" : "")}
-            onClick={ () => this.handleChangeSoundTheme(2) }>Instrumental
+            onClick={ () => this.handleChangeSoundTheme(2) }>Instrument
           </button>
           <button className={"theme-button" + (currentSoundTheme === 3 ? " chosen" : "")}
             onClick={ () => this.handleChangeSoundTheme(3) }>Farkost
@@ -155,10 +155,10 @@ export default class App extends React.Component {
             onClick={ () => this.handleChangeTextTheme(1) }>DDE
           </button>
           <button className={"theme-button" + (currentTextTheme === 2 ? " chosen" : "")}
-            onClick={ () => this.handleChangeTextTheme(2) }>Life quotes
+            onClick={ () => this.handleChangeTextTheme(2) }>Livet
           </button>
           <button className={"theme-button" + (currentTextTheme === 3 ? " chosen" : "")}
-            onClick={ () => this.handleChangeTextTheme(3) }>Kort og godt
+            onClick={ () => this.handleChangeTextTheme(3) }>Ordtak
           </button>
         </div>
         
