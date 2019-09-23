@@ -89,6 +89,10 @@ button.menu-button{
   background-color: transparent;
 }
 
+button.menu-button:active hr{
+  border-color: var(--orange-deep);
+}
+
 button.menu-button hr{
   margin:2px;
   width: 6vw;
@@ -111,6 +115,13 @@ button.menu-button hr{
   button.menu-button{
     display:flex;
     flex-direction: column;
+    transform: translateX(0);
+    transition: transform ease-in-out 0.3s;
+  }
+
+  button.menu-button.menu-open{
+    transform: translateX(60vw);
+    transition: transform ease-in-out 0.3s;
   }
 
   .theme-choice-container{
