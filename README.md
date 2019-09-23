@@ -21,6 +21,29 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 <li><a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> - Syntax extension for JavaScript</li>
 </ul>
 
+## React directory structure
+
+├── node_modules
+├── public
+│   ├── pictures
+│   │   └── . . .
+│   ├── sounds
+│   │   └── . . .
+│   └── texts
+│   │   └── . . .
+└── src
+    ├── components
+    │   └── Artwork
+    │       ├── css
+    │       │   └── . . .
+    │       └── js
+    │           └── . . .
+    ├── App.css
+    ├── App.js
+    ├── index.css
+    ├── index.js
+    └── App.test.js
+
 ## Development setup
 
 In the project directory, you can run:
