@@ -29,18 +29,15 @@ p.chosen-text{
     width: 100%;
 }
 
-div.svg{
-    height: 80%;
-    width: 80%;
-}
-
 svg{
     height: 100%;
     width: 100%;
 }
 
 
+
 .svg-container{
+    margin: 10%;
     grid-area: image-cont;
     display: flex;
     justify-content: center;
