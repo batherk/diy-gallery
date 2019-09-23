@@ -162,11 +162,11 @@ export default class Artwork extends React.Component {
       <div className="artwork-parent">
 
         <div className="svg-container">
-            <div dangerouslySetInnerHTML={{__html: chosenPic}}/>
+            <div className= "svg" dangerouslySetInnerHTML={{__html: chosenPic}}/>
         </div>
 
         <div className="text-container">
-            <p>
+            <p className="chosen-text">
                 {chosenText}
             </p>
         </div>

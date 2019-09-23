@@ -13,6 +13,10 @@
     }
 }
 
+p.chosen-text{
+    margin: 10%;
+}
+
 .artwork-container{
     display:flex;
     align-items: center;
@@ -21,6 +25,16 @@
 
 .artwork-parent{
     display: grid;
+    height: 100%;
+    width: 100%;
+}
+
+div.svg{
+    height: 80%;
+    width: 80%;
+}
+
+svg{
     height: 100%;
     width: 100%;
 }
