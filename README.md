@@ -1,11 +1,27 @@
-## Project 2
+## Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-The project displays a responsive website that lets the user interact with differene SVG-elements, sounds and texts to create artworks.
-Users are able to select desired categories for all elements and the website will randomly generate four different artworks, displayed 
-in separate tabs.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and displays a responsive website 
+which let users interact with different SVG-elements, sounds and texts to create artworks. Users can select desired categories for all 
+elements, and the website will randomly generate four different artworks, displayed in separate tabs.
 
-## Available Scripts
+## Motivation
+The project is a part of our submission for the subject IT2810 Webutvikling.
+
+## Technology stack
+
+#### Framworks:
+<ul>
+<li><a href="https://github.com/facebook/create-react-app">React</a> - Web framework for JavaScript</li>
+<li><a href="https://jestjs.io">Jest</a> - JavaScript testing framework</li>
+</ul>
+
+#### Dependencies 
+<ul>
+<li><a href="https://nodejs.dev/">Node.js</a> - JavaScript runtime environment</li>
+<li>>JSX - Syntax extension for JavaScript</li>
+</ul>
+
+## Development setup
 
 In the project directory, you can run:
 
