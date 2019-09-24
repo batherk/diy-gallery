@@ -1,5 +1,5 @@
 :root{
-  --charcoal: #373737;
+  --grey-dark: #373737;
   --grey: #767676;
   --grey-light: #E6E6E6;
   --orange-rusty: #be4f0c;
@@ -15,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color:var(--charcoal);
+  background-color:var(--grey-dark);
   color: var(--grey-light);
   font-weight: 100;
 }

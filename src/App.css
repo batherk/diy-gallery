@@ -95,6 +95,10 @@ h4{
   background-color: var(--orange-deep);
 }
 
+.hamburger-cont.menu-open{
+  z-index: 2;
+}
+
 /*Moves bottom line down*/
 .hamburger-cont .hamburger > div:after{
   top: 10px;
@@ -112,6 +116,18 @@ h4{
 }
 
 
+
+
+/* Overlay */
+
+div.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
 
 
 
@@ -156,7 +172,6 @@ button.artwork-button:hover, button.theme-button:hover{
 
 
 
-
 /* Layout for different screen types*/
 
 /* With category menu*/
@@ -186,11 +201,13 @@ button.artwork-button:hover, button.theme-button:hover{
     width: 60vw;
     background-color: var(--grey);
     overflow-y:auto;
+    z-index:inherit;
   }
 
   .theme-choice-container.menu-open{
     transform:translateX(100%);
     transition: var(--transition);
+    z-index: 2;
   }
   
   .artwork-container{
@@ -207,6 +224,26 @@ button.artwork-button:hover, button.theme-button:hover{
     height: 100%;
     width: 25%;
   }
+
+  div.overlay.menu-open{
+    transition: var(--transition);
+    z-index:1;
+    opacity: 0.5;
+  }
+  div.overlay{
+    opacity: 0;
+    transition: var(--transition);
+    z-index:-1;
+  }
+
+  div.overlay.menu-open ~ .artwork-container, 
+  div.overlay.menu-open ~ .artwork-choice-container, 
+  div.overlay.menu-open ~ header h1{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    transition: var(--transition)
+  }
+
 }
 
 /* Mobile portrait, Pad portrait*/
@@ -235,6 +272,10 @@ button.artwork-button:hover, button.theme-button:hover{
     grid-area:categories;
     height: 100%;
     overflow-y: auto;
+  }
+
+  div.overlay{
+    display:none;
   }
 
   header{
