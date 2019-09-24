@@ -236,6 +236,14 @@ button.artwork-button:hover, button.theme-button:hover{
     z-index:-1;
   }
 
+  div.overlay.menu-open ~ .artwork-container, 
+  div.overlay.menu-open ~ .artwork-choice-container, 
+  div.overlay.menu-open ~ header h1{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    transition: var(--transition)
+  }
+
 }
 
 /* Mobile portrait, Pad portrait*/

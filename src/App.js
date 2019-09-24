@@ -90,7 +90,7 @@ export default class App extends React.Component {
 
     return (
       <div className="parent-element">
-
+        <div className={this.state.menuOpen ? "overlay menu-open" : "overlay"} onClick={ () => this.menuHandler()}></div>
         <header>
           <div className={this.state.menuOpen ? "hamburger-cont menu-open" : "hamburger-cont"} onClick={ () => this.menuHandler()}>
             <button className="menu-button"></button>
@@ -98,7 +98,6 @@ export default class App extends React.Component {
           </div>
           <h1>The DIY Gallery</h1>
         </header>
-        <div className={this.state.menuOpen ? "overlay menu-open" : "overlay"} onClick={ () => this.menuHandler()}></div>
         <div className="artwork-choice-container">
           <button className={"artwork-button" + (currentArtworkNr === 1 ? " chosen" : "")}
             onClick={ () => this.handleChangeArtwork(1) }>Artwork 1
