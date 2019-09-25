@@ -11,6 +11,10 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 #### React
 #### AJAX
 #### HTML Web Storage
+The website implements both localstorage and sessionstorage.
+
+* Session storage is implemented as part of the Artwork.js component and is set every time the category is updated for the sound, picture or text. For each tab, the local path for the different elements diplayed on the page are saved to session storage using JSON. When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, parse it back to its original form and render the elements from your last session to the screen.
+
 #### Responsive Web Design
 #### Node.js and NPM
 #### Test
