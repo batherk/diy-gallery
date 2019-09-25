@@ -12,7 +12,7 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 #### AJAX
 All the elements that are displayed on the screen as part of the artwork are fetched using AJAX. When a category is selected, a random number is generated for that elements which decides which exact element is fetched from storage. The number is parsed into a string to form the path to the exact memory.
 
-* Pictures: All picture elements on the website are stored in SVG format. The randomly chosen SVG is fetched from memory and the data is stored in a variable using ```.text()```. The variable is rendered using ```dangerouslySetInnterHTML={{__html: variable}}``` and wrapped inside a ```<div>```-element as an SVG-container for better editability.
+* Pictures: All picture elements on the website are stored in SVG format. The randomly chosen SVG is fetched from memory and the data is stored in a variable using ```.text()```. The variable is rendered using ```dangerouslySetInnterHTML={{__html: variable}}``` and wrapped inside a ```<div>```-element (SVG-container) for better editability.
 * Sounds:
 * Texts:
 
