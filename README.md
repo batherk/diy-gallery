@@ -14,7 +14,7 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 The website implements both localstorage and sessionstorage.
 
 * Session storage is implemented as part of the Artwork.js component and is set every time the category is updated for the sound, picture and/or text. For each tab, the local path of the different elements are saved to session storage using JSON. When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, parse it back to its original form and render the elements from your last session to the screen.
-* Local storage is implemented as part of the Art.js component and is set every time the category is updated for the sound, picture and/or text. For local storage, the exact path for the elements are not saved to storage. Instead each category is numbered, and the chosen category is saved. When opening the browser, the page display pictures from the last chosen categories, but all elements will be randomly chosen from that category.
+* Local storage is implemented as part of the Art.js component and is set every time the category is updated for the sound, picture and/or text. For local storage, the exact path for the elements is not saved to storage. Instead each category is numbered, and the chosen category is saved. When opening the browser, the page display pictures from the last chosen categories, but all elements will be randomly chosen from that category.
 
 #### Responsive Web Design
 #### Node.js and NPM
