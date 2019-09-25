@@ -46,7 +46,7 @@ but all elements will be randomly chosen from that category.
 -- BAT skriv inn litt info her. Hva har du gjort her, hvorfor har du valgt å gjøre det slik
 
 #### Test
-
+As proposed by the project description, we used Jest to execute snapshot testing of our components App and Artwork.
 -- BAT skriv inn litt info her. Hva har du gjort her, hvorfor har du valgt å gjøre det slik
 
 #### Deployment and server setup
