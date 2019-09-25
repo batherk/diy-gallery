@@ -1,20 +1,5 @@
-/* For whole document*/
 
-:root{
-  --charcoal: #373737;
-  --grey: #767676;
-  --grey-light: #E6E6E6;
-  --orange-rusty: #be4f0c;
-  --orange-deep: #FF5A09;
-  --orange-light: #ec7f37;
-}
-.parent-element {
-  text-align: center;
-  background-color:var(--charcoal);
-  font-style: "Open Sans";
-  color: var(--grey-light);
-  font-weight: 100;
-}
+
 
 /* Header */
 
@@ -30,56 +15,160 @@ header {
 header h1{
   font-size: 6vh;
   margin:2px 5%;
-  font-weight: 100;
+  font-weight:100;
 }
 
 hr{
   border-color:var(--grey-light);
 }
 
+h4{
+  font-weight: 100;
+}
+
+/* Hamburger menu*/
+
+.hamburger-cont{
+  position: fixed;
+  top:0;
+  left:10px;
+  z-index:1;
+  height: 10vh;
+  transform: translateX(0);
+  transition: var(--transition)
+}
+
+.hamburger-cont.menu-open{
+  transform: translateX(60vw);
+}
+
+.hamburger-cont .menu-button{
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:2;
+  cursor: pointer;
+  width: 50px;
+  height: 10vh;
+  opacity: 0;
+  border: 0px;
+}
+
+.hamburger-cont .hamburger{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width:50px;
+  height:10vh;
+  background:transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*Center line*/
+.hamburger-cont .hamburger > div {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background-color: var(--grey-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/*Top and bottom line*/
+.hamburger-cont .hamburger > div:before,
+.hamburger-cont .hamburger > div:after{
+  content:'';
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+
+.hamburger-cont .menu-button:active + .hamburger > div{
+  background-color: var(--orange-deep);
+}
+
+.hamburger-cont.menu-open{
+  z-index: 2;
+}
+
+/*Moves bottom line down*/
+.hamburger-cont .hamburger > div:after{
+  top: 10px;
+}
+/*Rotation*/
+
+.hamburger-cont.menu-open .hamburger > div{
+  transform: rotate(135deg);
+}
+
+.hamburger-cont.menu-open .hamburger > div:before, 
+.hamburger-cont.menu-open .hamburger > div:after{
+  top: 0;
+  transform: rotate(90deg);
+}
+
+
+
+
+/* Overlay */
+
+div.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+
+
 /* Buttons */ 
 
+button{
+  font-family: var(--font-family);
+  font-weight: 100;
+}
 button:focus {outline:0;}
 
-/* Artwork buttons*/
+/* Artwork and themes buttons*/
 
-button.artwork-button{
+button.artwork-button, button.theme-button{
   background-color:transparent;
   border: 3px solid var(--grey-light);
-  border-width: 3px;
   color: var(--grey-light)
 }
 
-button.artwork-button.clicked{
-  border: 3px solid var(--orange-deep);
+button.artwork-button{
+  border-width: 3px;
 }
 
-button.artwork-button.chosen {
-  border: 3px solid var(--orange-deep);
+button.theme-button{
+  border-width: 1px;
+  margin:5px;
+  height: 5%;
 }
 
-button.artwork-button.chosen:hover {
-  border: 3px solid var(--orange-deep);
+button.artwork-button.chosen, button.theme-button.chosen {
+  border-color: var(--orange-deep);
 }
 
-button.artwork-button:hover{
-  border: 3px solid var(--orange-light);
-}
-button.menu-button{
-  height: 6vh;
-  width: 6vw;
-  margin-left: 5%;
-  align-items: center;
-  justify-content: space-evenly;
-  padding:0;
-  border: 0px;
-  background-color: transparent;
+button.artwork-button.chosen:hover, button.theme-button.chosen:hover {
+  border-color: var(--orange-deep);
 }
 
-button.menu-button hr{
-  margin:2px;
-  width: 6vw;
+button.artwork-button:hover, button.theme-button:hover{
+  border-color: var(--orange-light);
 }
+
 
 
 
@@ -90,32 +179,35 @@ button.menu-button hr{
   header{
     height: 10vh;
   }
+
+  header h1{
+    margin-left: 80px;
+  }
   .parent-element{
     display: flex;
-    flex-direction: column;
-  }
-
-  button.menu-button{
-    display:flex;
     flex-direction: column;
   }
 
   .theme-choice-container{
     order: 1;
     position: fixed;
+    left:-60vw;
     top: 0;
     display: flex;
     flex-direction: column;
     height: 100vh;
-    transform:translateX(-100%);
-    transition: transform ease-in-out 0.3s;
+    transform:translateX(0);
+    transition: var(--transition);
     width: 60vw;
     background-color: var(--grey);
+    overflow-y:auto;
+    z-index:inherit;
   }
 
   .theme-choice-container.menu-open{
-    transform:translateX(0);
-    transition: transform ease-in-out 0.3s;
+    transform:translateX(100%);
+    transition: var(--transition);
+    z-index: 2;
   }
   
   .artwork-container{
@@ -132,8 +224,27 @@ button.menu-button hr{
     height: 100%;
     width: 25%;
   }
-}
 
+  div.overlay.menu-open{
+    transition: var(--transition);
+    z-index:1;
+    opacity: 0.5;
+  }
+  div.overlay{
+    opacity: 0;
+    transition: var(--transition);
+    z-index:-1;
+  }
+
+  div.overlay.menu-open ~ .artwork-container, 
+  div.overlay.menu-open ~ .artwork-choice-container, 
+  div.overlay.menu-open ~ header h1{
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    transition: var(--transition)
+  }
+
+}
 
 /* Mobile portrait, Pad portrait*/
 @media screen and (orientation:portrait){}
@@ -145,7 +256,7 @@ button.menu-button hr{
 
 /* Desktop, Pad landscape */
 @media screen and (min-width:768px) and (orientation:landscape){
-  .menu-button, .close-menu{
+  .hamburger-cont{
     display:none;
   }
   .parent-element{
@@ -159,8 +270,14 @@ button.menu-button hr{
     display:flex;
     flex-direction: column;
     grid-area:categories;
+    height: 100%;
+    overflow-y: auto;
   }
-  
+
+  div.overlay{
+    display:none;
+  }
+
   header{
     grid-area:header;
   }
@@ -180,20 +297,3 @@ button.menu-button hr{
     padding: 0;
   }
 }
-
-
-
-
-
-
-
-/* example of timed transition, nice to have if we want to implement this somewhere
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/

@@ -1,40 +1,26 @@
+:root{
+  --grey-dark: #373737;
+  --grey: #767676;
+  --grey-light: #E6E6E6;
+  --orange-rusty: #be4f0c;
+  --orange-deep: #FF5A09;
+  --orange-light: #ec7f37;
+  --font-family: "Segoe UI", "Open Sans", "Helvetica Neue",sans-serif;
+  --transition: all 0.4s ease-in-out;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color:var(--grey-dark);
+  color: var(--grey-light);
+  font-weight: 100;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-
-/* Layout for different screen types*/
-
-/* Mobile portrait, Pad portrait*/
-@media screen and (orientation:portrait){
-  body{
-    background-color: green;
-  }
-}
-
-
-/* Mobile landscape*/
-@media screen and (max-width:767px) and (orientation:landscape){
-  body{
-    background-color: yellow;
-  }
-}
-
-
-/* Desktop, Pad*/
-@media screen and (min-width:768px) and (orientation:landscape){
-  body{
-    background-color: orange;
-  }
-}
-
