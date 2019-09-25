@@ -8,7 +8,12 @@ elements, and the website will randomly generate four different artworks, displa
 The project is a part of our submission for the subject IT2810 Webutvikling.
 
 ## Project requirements
+
 #### React
+React has been used extensively thoughout the whole project. After initiation the only change we made was to create a React-component
+out of App.js. We chose to do this as it seemed like a reasonable approach when creating a single page application. 
+
+
 #### AJAX
 All elements displayed as part of the artwork are fetched using AJAX. When a category is selected, a random number is generated which decides the exact element that is fetched from storage. All elements are named using the naming convention *'item1', 'item2',..,'itemN'*. The randomly chosen number is parsed into a string to form the path to the exact element in the public folder.
 
@@ -27,13 +32,26 @@ figured that this solution did not fulfil the given requirement of only loading 
 #### HTML Web Storage
 The website implements HTML5 Web Storage using both localstorage and sessionstorage, but in separate ways.
 
-* Session storage is implemented as part of the Artwork.js component and is set every time a category is updated for the sound, picture and/or text. For each tab, the local path of the different elements are saved to session storage using JSON. When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, parse it back to its original form and render the elements from your last session to the screen.
-* Local storage is implemented as part of the Art.js component and is set every time the category is updated for the sound, picture and/or text. For local storage, the exact path for the elements is not saved to storage. Instead each category is numbered, and the chosen category is saved. When opening the browser, the page display elements from the last chosen categories, but all elements will be randomly chosen from that category.
+* Session storage is implemented as part of the Artwork.js component and is set every time a category is updated for the sound, 
+picture and/or text. For each tab, the local path of the different elements are saved to session storage using JSON. 
+We chose to use this solution as it's an easy way to store and re-use previous elements. 
+When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, 
+parse it back to its original form and render the elements from your last session to the screen. 
+* Local storage is implemented and is set every time the category is updated for the sound, 
+picture and/or text. For local storage, the exact path for the elements is not saved to storage. Instead each category is 
+numbered, and the chosen category is saved. When opening the browser, the page display elements from the last chosen categories, 
+but all elements will be randomly chosen from that category.
 
 #### Responsive Web Design
-#### Node.js and NPM
+-- BAT skriv inn litt info her. Hva har du gjort her, hvorfor har du valgt å gjøre det slik
+
 #### Test
+
+-- BAT skriv inn litt info her. Hva har du gjort her, hvorfor har du valgt å gjøre det slik
+
 #### Deployment and server setup
+We followed the instructions given in the assignment document. We experienced only minor issues by doing this. The application was 
+deployed at the end of the project. 
 
 ## Built with 
 
@@ -46,6 +64,7 @@ The website implements HTML5 Web Storage using both localstorage and sessionstor
 #### Dependencies 
 <ul>
 <li><a href="https://nodejs.dev/">Node.js</a> - JavaScript runtime environment</li>
+<li><a href="https://www.npmjs.com/">npm</a> - Node Package Manager installed as part of Node.js</li>
 <li><a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> - Syntax extension for JavaScript</li>
 </ul>
 
