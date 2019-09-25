@@ -20,7 +20,7 @@ All elements displayed as part of the artwork are fetched using AJAX. When a cat
 #### HTML Web Storage
 The website implements HTML5 Web Storage using both localstorage and sessionstorage, but in separate ways.
 
-* Session storage is implemented as part of the Artwork.js component and is set every time the category is updated for the sound, picture and/or text. For each tab, the local path of the different elements are saved to session storage using JSON. When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, parse it back to its original form and render the elements from your last session to the screen.
+* Session storage is implemented as part of the Artwork.js component and is set every time a category is updated for the sound, picture and/or text. For each tab, the local path of the different elements are saved to session storage using JSON. When refreshing the page or opening it in a new tab, the page will retrieve the local path for the element from session storage, parse it back to its original form and render the elements from your last session to the screen.
 * Local storage is implemented as part of the Art.js component and is set every time the category is updated for the sound, picture and/or text. For local storage, the exact path for the elements is not saved to storage. Instead each category is numbered, and the chosen category is saved. When opening the browser, the page display elements from the last chosen categories, but all elements will be randomly chosen from that category.
 
 #### Responsive Web Design
