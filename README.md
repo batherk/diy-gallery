@@ -12,9 +12,16 @@ The project is a part of our submission for the subject IT2810 Webutvikling.
 #### AJAX
 All elements displayed as part of the artwork are fetched using AJAX. When a category is selected, a random number is generated which decides the exact element that is fetched from storage. All elements are named using the naming convention *'item1', 'item2',..,'itemN'*. The randomly chosen number is parsed into a string to form the path to the exact element in the public folder.
 
-* Pictures: All picture elements on the website are stored in SVG format. The randomly chosen SVG is fetched from memory and the data is stored in a variable using ```.text()```. The variable is rendered using ```dangerouslySetInnterHTML={{__html: variable}}``` and wrapped inside a ```<div>```-element (SVG-container) for better editability.
-* Sounds: All sound elements on the website are fetched directly from storage. The path of the randomly chosen sound is stored inside a variable, which is set as the source in a ```<audio>```-element and then rendered.
-* Texts: All text elements on the website are saved as JSON. Upon fetching, the text is extracted from the JSON and stored in a variable. The variable of the chosen text is then rendered.
+* Pictures: All picture elements on the website are stored in SVG format. The randomly chosen SVG is fetched 
+from memory and the data is stored in a variable using ```.text()```. The variable is rendered using 
+```dangerouslySetInnerHTML={{__html: variable}}``` and wrapped inside a ```<div>```-element (SVG-container) 
+for better editability. We chose to use dangerouslySetInnerHTML as it's the way to set HTML directly from React.
+* Sounds: All sound elements on the website are fetched directly from storage by the HTML5 audio-tag. The path of 
+the randomly chosen sound is stored inside a variable, which is set as the source in a ```<audio>```-element and then rendered.
+This was the suggested procedure by the project description. 
+* Texts: All text elements on the website are saved as JSON. Upon fetching, the text is extracted from the JSON and 
+stored in a variable. The variable of the chosen text is then rendered. We considered putting connected texts in one file, but 
+figured that this solution did not fulfil the given requirement of only loading on demand. 
 
 
 #### HTML Web Storage
