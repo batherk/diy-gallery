@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Artwork.css';
 
 
@@ -97,7 +98,7 @@ export default class Artwork extends React.Component {
       picturePath = artworks[artNr-1][0];
     } else {
       const theme = picTheme.toString()
-      const randomFile = Math.floor(Math.random()*4).toString()
+      const randomFile = Math.floor(Math.random()*4+1).toString()
       picturePath = 'pictures/theme' + theme + '/feed' + randomFile + '.svg';
     }
     let updatedArtworks = artworks;
