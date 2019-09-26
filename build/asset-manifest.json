@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/prosjekt2/static/css/main.3e802ece.chunk.css",
+    "main.css": "/prosjekt2/static/css/main.f48ab364.chunk.css",
     "main.js": "/prosjekt2/static/js/main.cf5fb7e7.chunk.js",
     "main.js.map": "/prosjekt2/static/js/main.cf5fb7e7.chunk.js.map",
     "runtime~main.js": "/prosjekt2/static/js/runtime~main.b663c3ee.js",
@@ -8,8 +8,8 @@
     "static/js/2.8c5061e8.chunk.js": "/prosjekt2/static/js/2.8c5061e8.chunk.js",
     "static/js/2.8c5061e8.chunk.js.map": "/prosjekt2/static/js/2.8c5061e8.chunk.js.map",
     "index.html": "/prosjekt2/index.html",
-    "precache-manifest.8db5891fb4de2f403766a1a2487f86b8.js": "/prosjekt2/precache-manifest.8db5891fb4de2f403766a1a2487f86b8.js",
+    "precache-manifest.d0c8f0c9b973771ce5b6b83371fbb2e5.js": "/prosjekt2/precache-manifest.d0c8f0c9b973771ce5b6b83371fbb2e5.js",
     "service-worker.js": "/prosjekt2/service-worker.js",
-    "static/css/main.3e802ece.chunk.css.map": "/prosjekt2/static/css/main.3e802ece.chunk.css.map"
+    "static/css/main.f48ab364.chunk.css.map": "/prosjekt2/static/css/main.f48ab364.chunk.css.map"
   }
 }
