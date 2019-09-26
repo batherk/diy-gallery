@@ -22,10 +22,6 @@ hr{
   border-color:var(--grey-light);
 }
 
-h4{
-  font-weight: 100;
-}
-
 /* Hamburger menu*/
 
 .hamburger-cont{
