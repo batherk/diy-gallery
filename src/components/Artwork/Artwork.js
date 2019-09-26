@@ -39,8 +39,6 @@ export default class Artwork extends React.Component {
 
     if (this.props.artNr !== artNr) {
       this.setState({ artNr : this.props.artNr })
-      console.log("artprop change: " + this.props.picTheme)
-
       this.setPicture(this.props.picTheme)
       this.setSound(this.props.soundTheme)
       this.setText(this.props.textTheme)
@@ -81,7 +79,6 @@ export default class Artwork extends React.Component {
   fetchSessionStorage = async () => {
     const artworks = await JSON.parse(sessionStorage.getItem("sessionCombination"));
     this.setState({ artworks : artworks })
-    console.log("fetfh STO: " + this.state.picTheme)
     this.setPicture(this.state.picTheme)
     this.setSound(this.state.soundTheme)
     this.setText(this.state.textTheme)
