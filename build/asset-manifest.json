@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/prosjekt2/static/css/main.3cee52ca.chunk.css",
+    "main.js": "/prosjekt2/static/js/main.cf5fb7e7.chunk.js",
+    "main.js.map": "/prosjekt2/static/js/main.cf5fb7e7.chunk.js.map",
+    "runtime~main.js": "/prosjekt2/static/js/runtime~main.b663c3ee.js",
+    "runtime~main.js.map": "/prosjekt2/static/js/runtime~main.b663c3ee.js.map",
+    "static/js/2.8c5061e8.chunk.js": "/prosjekt2/static/js/2.8c5061e8.chunk.js",
+    "static/js/2.8c5061e8.chunk.js.map": "/prosjekt2/static/js/2.8c5061e8.chunk.js.map",
+    "index.html": "/prosjekt2/index.html",
+    "precache-manifest.89495206f8acc7bbcaa34ab4ad47bb8f.js": "/prosjekt2/precache-manifest.89495206f8acc7bbcaa34ab4ad47bb8f.js",
+    "service-worker.js": "/prosjekt2/service-worker.js",
+    "static/css/main.3cee52ca.chunk.css.map": "/prosjekt2/static/css/main.3cee52ca.chunk.css.map"
+  }
+}
