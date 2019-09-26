@@ -10,13 +10,13 @@ export default class Artwork extends React.Component {
       artworks : [['','',''], ['','',''], ['','',''], ['','','']],  
                                   // holds paths to artwork content within the given 
                                   // themes. Format: [picturePath, soundPath, textPath]
-      artNr : JSON.parse(localStorage.getItem("currentArtworkNr")),                  
+      artNr : JSON.parse(localStorage.getItem("currentArtworkNr")) || 1,                  
                                   // holds the current artwork nr
-      picTheme : JSON.parse(localStorage.getItem("currentPictureTheme")),               
+      picTheme : JSON.parse(localStorage.getItem("currentPictureTheme")) || 1,               
                                   // holds the current picture theme
-      soundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")),             
+      soundTheme : JSON.parse(localStorage.getItem("currentSoundTheme")) || 1,             
                                   // holds the current sound theme
-      textTheme : JSON.parse(localStorage.getItem("currentTextTheme")),              
+      textTheme : JSON.parse(localStorage.getItem("currentTextTheme")) || 1,              
                                   // holds the current text theme              
       chosenPic : [],             // holds the current picture in the artwork
       chosenSound : '',           // holds the current sound in the artwork
@@ -28,9 +28,9 @@ export default class Artwork extends React.Component {
     if(sessionStorage.getItem("sessionCombination")) { 
       this.fetchSessionStorage()
     } else {
-      this.setPicture()
-      this.setSound()
-      this.setText()
+      this.setPicture(this.state.picTheme)
+      this.setSound(this.state.soundTheme)
+      this.setText(this.state.textTheme)
     }
   }
 
@@ -39,27 +39,27 @@ export default class Artwork extends React.Component {
 
     if (this.props.artNr !== artNr) {
       this.setState({ artNr : this.props.artNr })
-      this.setPicture()
-      this.setSound()
-      this.setText()
+      this.setPicture(this.props.picTheme)
+      this.setSound(this.props.soundTheme)
+      this.setText(this.props.textTheme)
     }
 
     if (this.props.picTheme !== picTheme) {
       this.resetArtworksTheme(0)
       this.setState({ picTheme : this.props.picTheme })
-      this.setPicture()
+      this.setPicture(this.props.picTheme)
     }
 
     if (this.props.soundTheme !== soundTheme) {
       this.resetArtworksTheme(1)
       this.setState({ soundTheme : this.props.soundTheme })
-      this.setSound()
+      this.setSound(this.props.soundTheme)
     }
 
     if (this.props.textTheme !== textTheme) {
       this.resetArtworksTheme(2)
       this.setState({ textTheme : this.props.textTheme })
-      this.setText()
+      this.setText(this.props.textTheme)
     }
   }
 
@@ -79,9 +79,9 @@ export default class Artwork extends React.Component {
   fetchSessionStorage = async () => {
     const artworks = await JSON.parse(sessionStorage.getItem("sessionCombination"));
     this.setState({ artworks : artworks })
-    this.setPicture()
-    this.setSound()
-    this.setText()
+    this.setPicture(this.state.picTheme)
+    this.setSound(this.state.soundTheme)
+    this.setText(this.state.textTheme)
   }
 
   // exports newly set values to session storage
@@ -90,8 +90,8 @@ export default class Artwork extends React.Component {
   }
   
   // fetches a given or a random picture within given theme
-  setPicture = async () => {
-    const { artNr, picTheme } = this.props;
+  setPicture = async (picTheme) => {
+    const { artNr } = this.props;
     const { artworks } = this.state;
     let picturePath = '';
     if (artworks[artNr-1][0]) {
@@ -114,8 +114,8 @@ export default class Artwork extends React.Component {
   }
 
   // fetches a given or a random sound within given theme
-  setSound = async () => {
-    const { artNr, soundTheme } = this.props;
+  setSound = async (soundTheme) => {
+    const { artNr } = this.props;
     const { artworks } = this.state;
     let soundPath = ''
     if (artworks[artNr-1][1]) {
@@ -135,8 +135,8 @@ export default class Artwork extends React.Component {
   }
 
   // fetches a given or a random text within given theme
-  setText = async () => {
-    const { artNr, textTheme } = this.props;
+  setText = async (textTheme) => {
+    const { artNr } = this.props;
     const { artworks } = this.state;
     let textPath = ''
     if (artworks[artNr-1][2]) {
