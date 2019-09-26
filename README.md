@@ -79,9 +79,9 @@ deployed at the end of the project.
 <li><a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> - Syntax extension for JavaScript</li>
 </ul>
 
-## React directory structure
+## Repository structure
 ```
-├── node_modules
+├── build
 │       └── . . .
 ├── public
 │   ├── pictures
@@ -90,18 +90,21 @@ deployed at the end of the project.
 │   │   └── . . .
 │   └── texts
 │        └── . . .
-└── src
-    ├── components
-    │   └── Artwork
-    │       ├── css
-    │       │   └── . . .
-    │       └── js
-    │           └── . . .
-    ├── App.css
-    ├── App.js
-    ├── index.css
-    ├── index.js
-    └── App.test.js
+├── src
+|   ├── __tests__
+|   │   └── Snapshots.test.js
+|   ├── components
+|   │   └── Artwork
+|   │       ├── Artwork.css
+|   │       └── Artwork.js
+|   ├── App.css
+|   ├── App.js
+|   ├── index.css
+|   ├── index.js
+|   └── . . .
+├── .gitignore
+├── README.md
+└── package.json
 ```
 
 ## Development setup
