@@ -51,9 +51,22 @@ but all elements will be randomly chosen from that category. Not rocket science 
 possibility, but we figured it was a decent introduction on our part to begin working with local storage.
 
 #### Responsive Web Design
--- BAT skriv inn litt info her. Hva har du gjort her, hvorfor har du valgt å gjøre det slik. 
-Kjør også en vurdering på om vi kan hevde at JEST er benyttet som et framework under eller om vi ikke kan hevde det 
-siden det ble som det ble med testene..
+As described in the project requirements, the web application adapts to the user's device. 
+This is done by checking the rotation and the size of the device's viewbox with media queries in CSS. 
+The type of device is also checked, because it needs to have a screen to show the user interface.
+For phones and pads in portait mode, the buttons for choosing categories is hidden in a hamburger menu.
+But, for desktops and pads in landscape mode, they are shown on the right hand side. 
+There is also a change in layout depending on the different devices: 
+In portrait mode the components are stacked vertically, but in landscape mode they are shown horizontally. 
+Viewport is used extensively to try to minimize the user's need for scrolling. 
+One of the main objectives was to make the user see all possible actions, and reduce the number of actions it takes to achieve a goal.
+On small devices, we found it necessary to hide the categories for the visibility of the main objects and functionality. 
+The SVG-images are also scaled according to the size of the device. 
+The only thing that wasn't customized in the application was the audio controller. 
+It does not have any options to style the main components of the controller, and every device have their own way of displaying it. 
+The application was tested on all devices and in several web browsers (Safari, Chrome and Firefox).
+
+
 
 #### Test
 As required by the project description, we created and executed snapshot testing of our components App and Artwork.
